@@ -1,0 +1,28 @@
+{* Latte template *}
+
+{block content}
+
+
+{if $user->isInRole('admin')}
+    <a n:href="Produkty:novy">Novy produkt</a>
+{/if}
+
+<table>
+    <tr n:foreach="$produkty as $produkt">
+        <td>{$produkt->nazev}</td>
+        <td>{$produkt->popis}</td>
+        <td>{$produkt->cena}</td>
+        <td>{$produkt->id_materialu}</td>
+        <td>{$produkt->mnozstvi}</td>
+        {form mnozstviForm}
+            {label $form['mnozstvi']}{input $form['mnozstvi']}
+            {input $form['id_produktu'], default=>$produkt->id_produktu}
+            {/label}
+        {/form}
+        <td><a n:href="Produkty:AddProduktu $produkt->id_produktu">Kosik</a></td>
+        {if $user->isInRole('admin')}
+            <td><a n:href="Produkty:edit $produkt->id_produktu">Editovat</a></td>
+            <td><a n:href="Produkty:delete $produkt->id_produktu">Smazat</a></td>
+        {/if}
+    </tr>
+</table>

@@ -1,0 +1,21 @@
+{* Latte template *}
+
+{block content}
+
+
+{if $user->isInRole('admin')}
+    <a n:href="Clanky:novy">Novy clanek</a>
+{/if}
+
+<div n:foreach="$clanky as $clanek" class="post">
+    <div class="date">{$clanek->datum|date:'j. n. Y'}</div>
+
+    <h3><a n:href="Clanky:detail $clanek->id_clanku">{$clanek->nadpis}</a></h3>
+
+    {if $user->isInRole('admin')}
+        <a n:href="Clanky:edit $clanek->id_clanku">Editovat</a>
+        <a n:href="Clanky:delete $clanek->id_clanku">Smazat</a>
+    {/if}
+
+    <div>{$clanek->text|truncate:25}</div>
+</div>

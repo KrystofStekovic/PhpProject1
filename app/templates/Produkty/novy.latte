@@ -1,0 +1,7 @@
+{* Latte template *}
+
+{block content}
+{if $user->isInRole('admin')}
+    <h2>Vytvoreni noveho produktu</h2>
+    {control produktForm}
+{/if}

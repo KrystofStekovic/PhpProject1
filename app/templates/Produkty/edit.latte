@@ -1,0 +1,7 @@
+
+
+{block content}
+{if $user->isInRole('admin')}
+    <h3>Upravit Produkt</h3>
+    {control produktForm}
+{/if}
