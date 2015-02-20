@@ -35,7 +35,22 @@ class KosikManager extends Nette\Object {
         $this->database = $database;
     }
 
-    public function getKosik($user) {
+    public function getPrehledKosiku($user) {
+        $sql = 'SELECT 
+            datum_vytvoreni, 
+            COUNT(id_zbozi) AS produkty, 
+            Sum(produkty.cena*zbozi_kosik.mnozstvi) AS suma 
+                FROM kosiky 
+                    NATURAL JOIN uzivatele
+                    NATURAL JOIN zbozi_kosik
+                    INNER JOIN produkty ON zbozi_kosik.id_zbozi = produkty.id_produktu
+                WHERE kosiky.id_uzivatele = ? 
+                GROUP BY kosiky.id_kosiku';
+        $kosiky = $this->database->queryArgs($sql, array($user->id));
+        return $kosiky;
+    }
+
+    public function getOpenKosik($user) {
         $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)
                 ->where(self::COLUMN_ID_UZIVATELE . ' = ? AND ' . self::COLUMN_OTEVRENY . ' = ?', $user->id, true)
                 ->fetch();
@@ -51,7 +66,7 @@ class KosikManager extends Nette\Object {
     }
 
     public function addProdukt($user, $idProduktu, $mnozstvi) {
-        $kosik = $this->getKosik($user);
+        $kosik = $this->getOpenKosik($user);
         $this->database->table(self::TABLE_NAME_ZBOZI_KOSIKU)->insert(array(
             self::COLUMN_ID_KOSIKU => $kosik->id_kosiku,
             self::COLUMN_ID_ZBOZI => $idProduktu,

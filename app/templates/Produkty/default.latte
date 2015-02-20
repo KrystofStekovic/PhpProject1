@@ -6,23 +6,20 @@
 {if $user->isInRole('admin')}
     <a n:href="Produkty:novy">Novy produkt</a>
 {/if}
+<div n:foreach="$produkty as $produkt">
+    {$produkt->nazev}
+    {$produkt->popis}
+    {$produkt->cena}
+    {$produkt->id_materialu}
+    {$produkt->mnozstvi}
 
-<table>
-    <div n:foreach="$produkty as $produkt">
-        {$produkt->nazev}
-        {$produkt->popis}
-        {$produkt->cena}
-        {$produkt->id_materialu}
-        {$produkt->mnozstvi}
-        
-        {form mnozstviForm}
-            {label $form['mnozstvi']}{input $form['mnozstvi']}{/label}
-            {input $form['id_produktu'], value=>$produkt->id_produktu}
-            {input $form['send']}        
-        {/form}
-        {if $user->isInRole('admin')}
-            <a n:href="Produkty:edit $produkt->id_produktu">Editovat</a>
-            <a n:href="Produkty:delete $produkt->id_produktu">Smazat</a>
-        {/if}
-    </div>
-</table>
+    {form mnozstviForm}
+    {label $form['mnozstvi']}{input $form['mnozstvi']}{/label}
+    {input $form['id_produktu'], value=>$produkt->id_produktu}
+    {input $form['send']}        
+{/form}
+{if $user->isInRole('admin')}
+    <a n:href="Produkty:edit $produkt->id_produktu">Editovat</a>
+    <a n:href="Produkty:delete $produkt->id_produktu">Smazat</a>
+{/if}
+</div>

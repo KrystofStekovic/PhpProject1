@@ -60,8 +60,6 @@ class ProduktyPresenter extends BasePresenter {
     public function createComponentMnozstviForm($idProduktu) {
         $form = new Form;
         $form->addHidden('id_produktu');
-//                ->addRule(Form::INTEGER, '')
-//                ->setValue($idProduktu);
         $form->addText('mnozstvi', '')
                 ->addRule(Form::INTEGER, 'Mnozstvi musi byt cislo')
                 ->setType('number');
