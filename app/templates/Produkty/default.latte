@@ -8,21 +8,21 @@
 {/if}
 
 <table>
-    <tr n:foreach="$produkty as $produkt">
-        <td>{$produkt->nazev}</td>
-        <td>{$produkt->popis}</td>
-        <td>{$produkt->cena}</td>
-        <td>{$produkt->id_materialu}</td>
-        <td>{$produkt->mnozstvi}</td>
+    <div n:foreach="$produkty as $produkt">
+        {$produkt->nazev}
+        {$produkt->popis}
+        {$produkt->cena}
+        {$produkt->id_materialu}
+        {$produkt->mnozstvi}
+        
         {form mnozstviForm}
-            {label $form['mnozstvi']}{input $form['mnozstvi']}
-            {input $form['id_produktu'], default=>$produkt->id_produktu}
-            {/label}
+            {label $form['mnozstvi']}{input $form['mnozstvi']}{/label}
+            {input $form['id_produktu'], value=>$produkt->id_produktu}
+            {input $form['send']}        
         {/form}
-        <td><a n:href="Produkty:AddProduktu $produkt->id_produktu">Kosik</a></td>
         {if $user->isInRole('admin')}
-            <td><a n:href="Produkty:edit $produkt->id_produktu">Editovat</a></td>
-            <td><a n:href="Produkty:delete $produkt->id_produktu">Smazat</a></td>
+            <a n:href="Produkty:edit $produkt->id_produktu">Editovat</a>
+            <a n:href="Produkty:delete $produkt->id_produktu">Smazat</a>
         {/if}
-    </tr>
+    </div>
 </table>

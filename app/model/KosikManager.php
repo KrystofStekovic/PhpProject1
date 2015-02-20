@@ -22,8 +22,8 @@ class KosikManager extends Nette\Object {
             TABLE_NAME_ZBOZI_KOSIKU = 'zbozi_kosik',
             COLUMN_ID_KOSIKU = 'id_kosiku',
             COLUMN_ID_UZIVATELE = 'id_uzivatele',
-            COLUMN_ID_ZBOZI_KOSIK = 'id_uzivatele',
-            COLUMN_ID_ZBOZI = 'id_uzivatele',
+            COLUMN_ID_ZBOZI_KOSIK = 'id_zbozi_kosik',
+            COLUMN_ID_ZBOZI = 'id_zbozi',
             COLUMN_MNOZSTVI = 'mnozstvi';
 
     /** @var Nette\Database\Context */
@@ -35,7 +35,7 @@ class KosikManager extends Nette\Object {
 
     public function getKosik($user) {
         $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)->where(self::COLUMN_ID_UZIVATELE, $user->id)->fetch();
-        if (!kosik) {
+        if (!$kosik) {
             $this->database->table(self::TABLE_NAME_KOSIKY)->insert(array(
                 self::COLUMN_ID_UZIVATELE => $user->id,
             ));
@@ -45,7 +45,7 @@ class KosikManager extends Nette\Object {
     }
 
     public function addProdukt($user, $idProduktu, $mnozstvi) {
-        $kosik = getKosik($user);
+        $kosik = $this->getKosik($user);
         $this->database->table(self::TABLE_NAME_ZBOZI_KOSIKU)->insert(array(
             self::COLUMN_ID_KOSIKU => $kosik->id_kosiku,
             self::COLUMN_ID_ZBOZI => $idProduktu,

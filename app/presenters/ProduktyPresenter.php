@@ -16,14 +16,13 @@ use Nette,
  *
  * @author sasa
  */
-class ProduktyPresenter extends BasePresenter {    
-    
+class ProduktyPresenter extends BasePresenter {
+
     /**
      * @var \App\Model\KosikManager
      * @inject
      */
     public $kosikManager;
-    
     private $produkty;
 
     public function __construct(Nette\Database\Context $database) {
@@ -58,11 +57,15 @@ class ProduktyPresenter extends BasePresenter {
         return $form;
     }
 
-    public function createComponentMnozstviForm() {
+    public function createComponentMnozstviForm($idProduktu) {
         $form = new Form;
         $form->addHidden('id_produktu');
+//                ->addRule(Form::INTEGER, '')
+//                ->setValue($idProduktu);
         $form->addText('mnozstvi', '')
+                ->addRule(Form::INTEGER, 'Mnozstvi musi byt cislo')
                 ->setType('number');
+        $form->addSubmit('send', 'Pridat do kosiku');
         $form->onSuccess[] = array($this, 'actionAddProduktu');
         return $form;
     }
@@ -96,9 +99,8 @@ class ProduktyPresenter extends BasePresenter {
         $this->redirect('default');
     }
 
-    public function actionAddProduktu($produktId) {
-        $mnozstvi = $form->getHttpData($form::DATA_LINE, 'mnozstvi');
-        $this->kosikManager->addProdukt($this->user, $produktId, $mnozstvi);
+    public function actionAddProduktu($form, $values) {
+        $this->kosikManager->addProdukt($this->user, $values->id_produktu, $values->mnozstvi);
     }
 
 }
