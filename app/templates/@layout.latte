@@ -21,10 +21,12 @@
         <a n:href="Clanky:default">Clanky</a>
         <a n:href="Aktuality:default">Aktuality</a>
         <a n:href="Produkty:default">Produkty</a>
-        <a n:href="Materialy:default">Materialy</a>
+        {if $user->isInRole('admin')}
+            <a n:href="Materialy:default">Materialy</a>
+        {/if}
         {if $user->isLoggedIn()}
             <a n:href="Sign:out">Odhlasit</a>
-        {/if}{if !$user->isLoggedIn()}
+        {else}
             <a n:href="Sign:in">Prihlasit</a>
             <a n:href="Sign:novy">Registrace</a>
         {/if}

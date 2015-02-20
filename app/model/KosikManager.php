@@ -8,7 +8,8 @@
 
 namespace App\Model;
 
-use Nette;
+use Nette,
+    Tracy\Debugger;
 
 /**
  * Description of KosikManager
@@ -22,6 +23,7 @@ class KosikManager extends Nette\Object {
             TABLE_NAME_ZBOZI_KOSIKU = 'zbozi_kosik',
             COLUMN_ID_KOSIKU = 'id_kosiku',
             COLUMN_ID_UZIVATELE = 'id_uzivatele',
+            COLUMN_OTEVRENY = 'otevreny',
             COLUMN_ID_ZBOZI_KOSIK = 'id_zbozi_kosik',
             COLUMN_ID_ZBOZI = 'id_zbozi',
             COLUMN_MNOZSTVI = 'mnozstvi';
@@ -34,12 +36,16 @@ class KosikManager extends Nette\Object {
     }
 
     public function getKosik($user) {
-        $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)->where(self::COLUMN_ID_UZIVATELE, $user->id)->fetch();
+        $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)
+                ->where(self::COLUMN_ID_UZIVATELE . ' = ? AND ' . self::COLUMN_OTEVRENY . ' = ?', $user->id, true)
+                ->fetch();
         if (!$kosik) {
             $this->database->table(self::TABLE_NAME_KOSIKY)->insert(array(
                 self::COLUMN_ID_UZIVATELE => $user->id,
             ));
-            $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)->where(self::COLUMN_ID_UZIVATELE, $user->id)->fetch();
+            $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)
+                    ->where(self::COLUMN_ID_UZIVATELE . ' = ? AND ' . self::COLUMN_OTEVRENY . ' = ?', $user->id, true)
+                    ->fetch();
         }
         return $kosik;
     }

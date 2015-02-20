@@ -101,6 +101,7 @@ class ProduktyPresenter extends BasePresenter {
 
     public function actionAddProduktu($form, $values) {
         $this->kosikManager->addProdukt($this->user, $values->id_produktu, $values->mnozstvi);
+        $this->redirect('this');
     }
 
 }

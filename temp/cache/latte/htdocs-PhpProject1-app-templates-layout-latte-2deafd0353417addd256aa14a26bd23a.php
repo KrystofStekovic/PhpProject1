@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5698348401', 'html')
+list($_b, $_g, $_l) = $template->initialize('4510031134', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lb0ccedc1b2f_head')) { function _lb0ccedc1b2f_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lb5ec3539627_head')) { function _lb5ec3539627_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lba268e48e61_scripts')) { function _lba268e48e61_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbcb3487be5a_scripts')) { function _lbcb3487be5a_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>        <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
         <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
         <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
@@ -68,13 +68,13 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 ">Aktuality</a>
         <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Produkty:default"), ENT_COMPAT) ?>
 ">Produkty</a>
-        <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:default"), ENT_COMPAT) ?>
+<?php if ($user->isInRole('admin')) { ?>
+            <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:default"), ENT_COMPAT) ?>
 ">Materialy</a>
-<?php if ($user->isLoggedIn()) { ?>
+<?php } if ($user->isLoggedIn()) { ?>
             <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Sign:out"), ENT_COMPAT) ?>
 ">Odhlasit</a>
-        <?php } if (!$user->isLoggedIn()) { ?>
-
+<?php } else { ?>
             <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Sign:in"), ENT_COMPAT) ?>
 ">Prihlasit</a>
             <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Sign:novy"), ENT_COMPAT) ?>
