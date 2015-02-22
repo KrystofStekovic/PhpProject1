@@ -2,15 +2,17 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/Clanky/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('8714969456', 'html')
+list($_b, $_g, $_l) = $template->initialize('1336500886', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb588a2038a7_content')) { function _lb588a2038a7_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:novy"), ENT_COMPAT) ?>
+if (!function_exists($_b->blocks['content'][] = '_lbf7bd0ca0c1_content')) { function _lbf7bd0ca0c1_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;if ($user->isInRole('admin')) { ?>
+    <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:novy"), ENT_COMPAT) ?>
 ">Novy clanek</a>
+<?php } ?>
 
 <?php $iterations = 0; foreach ($clanky as $clanek) { ?><div class="post">
     <div class="date"><?php echo Latte\Runtime\Filters::escapeHtml($template->date($clanek->datum, 'j. n. Y'), ENT_NOQUOTES) ?></div>
@@ -18,10 +20,12 @@ if (!function_exists($_b->blocks['content'][] = '_lb588a2038a7_content')) { func
     <h3><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:detail", array($clanek->id_clanku)), ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($clanek->nadpis, ENT_NOQUOTES) ?></a></h3>
 
-    <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:edit", array($clanek->id_clanku)), ENT_COMPAT) ?>
+<?php if ($user->isInRole('admin')) { ?>
+        <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:edit", array($clanek->id_clanku)), ENT_COMPAT) ?>
 ">Editovat</a>
-    <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:delete", array($clanek->id_clanku)), ENT_COMPAT) ?>
+        <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:delete", array($clanek->id_clanku)), ENT_COMPAT) ?>
 ">Smazat</a>
+<?php } ?>
 
     <div><?php echo Latte\Runtime\Filters::escapeHtml($template->truncate($clanek->text, 25), ENT_NOQUOTES) ?></div>
 </div><?php $iterations++; } 
@@ -48,6 +52,7 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 // main template
 //
 ?>
+
 
 <?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

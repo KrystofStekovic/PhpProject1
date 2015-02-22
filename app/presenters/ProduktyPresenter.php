@@ -9,6 +9,7 @@
 namespace App\Presenters;
 
 use Nette,
+    Nette\Http,
     Nette\Application\UI\Form;
 
 /**
@@ -52,6 +53,8 @@ class ProduktyPresenter extends BasePresenter {
                 ->setRequired();
         $form->addText('odecetMnozstvi', 'Odpocitat ze skladu:')
                 ->setRequired();
+        $form->addUpload('obrazek', 'Obrazek:')
+                ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
         $form->addSubmit('send', 'Ulozit produkt');
         $form->onSuccess[] = array($this, 'insertProdukt');
         return $form;
@@ -77,6 +80,10 @@ class ProduktyPresenter extends BasePresenter {
             $produkt->update($values);
             $this->flashMessage('Produkt byl úspěšně upraven.', 'success');
         } else {
+            $file = $values->obrazek;
+            $adresa = 'www/images/';
+            $file->move($adresa);
+            $obrazek = $this->database->table('obrazky')->insert($obrazek->name, $adresa . $obrazek->name);
             $produkt = $this->database->table('produkty')->insert($values);
             $this->flashMessage('Produkt byl úspěšně vlozen.', 'success');
         }
