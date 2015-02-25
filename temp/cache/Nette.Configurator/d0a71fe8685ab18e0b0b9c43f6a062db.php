@@ -59,7 +59,7 @@ class SystemContainer extends Nette\DI\Container
 			'nette\\application\\presenterfactory' => array('nette.presenterFactory'),
 			'nette\\application\\irouter' => array('router'),
 			'nette\\mail\\imailer' => array('nette.mailer'),
-			'nette\\mail\\sendmailmailer' => array('nette.mailer'),
+			'nette\\mail\\smtpmailer' => array('nette.mailer'),
 			'nette\\bridges\\applicationlatte\\ilattefactory' => array('nette.latteFactory'),
 			'nette\\application\\ui\\itemplatefactory' => array('nette.templateFactory'),
 			'nette\\bridges\\applicationlatte\\templatefactory' => array('nette.templateFactory'),
@@ -265,11 +265,19 @@ class SystemContainer extends Nette\DI\Container
 
 
 	/**
-	 * @return Nette\Mail\SendmailMailer
+	 * @return Nette\Mail\SmtpMailer
 	 */
 	public function createServiceNette__mailer()
 	{
-		$service = new Nette\Mail\SendmailMailer;
+		$service = new Nette\Mail\SmtpMailer(array(
+			'smtp' => TRUE,
+			'host' => 'smtp.gmail.com',
+			'port' => NULL,
+			'username' => 'tofisk@gmail.com',
+			'password' => 'rh7u5b24h',
+			'secure' => NULL,
+			'timeout' => NULL,
+		));
 		return $service;
 	}
 

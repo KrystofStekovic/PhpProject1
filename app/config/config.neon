@@ -20,6 +20,12 @@ nette:
 	session:
 		expiration: 14 days
 
+	mailer:
+		smtp: true
+		host: 'smtp.gmail.com'
+		username: 'tofisk@gmail.com'
+		password: 'rh7u5b24h'
+
 
 services:
 	- App\Model\UserManager

@@ -1,0 +1,12 @@
+<?php //netteCache[01]000252a:3:{s:4:"time";s:21:"0.58233600 1424905346";s:9:"callbacks";a:1:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:60:"C:\xampp\htdocs\PhpProject1\app\presenters\SignPresenter.php";i:2;i:1424905319;}}s:10:"serialized";b:1;}?>a:1:{s:28:"App\Presenters\SignPresenter";a:5:{s:5:"class";s:36:"/**
+ * Sign in/out presenters.
+ */";s:3:"use";a:6:{s:5:"Nette";s:5:"Nette";s:7:"Strings";s:19:"Nette\Utils\Strings";s:7:"Message";s:18:"Nette\Mail\Message";s:10:"SmtpMailer";s:21:"Nette\Mail\SmtpMailer";s:8:"Debugger";s:20:"Nette\Tracy\Debugger";s:11:"UserManager";s:21:"App\Model\UserManager";}s:12:"$userManager";s:64:"/**
+     * @var \App\Model\UserManager
+     * @inject
+     */";s:7:"$mailer";s:64:"/**
+     * @var Nette\Mail\SmtpMailer 
+     * @inject
+     */";s:25:"createComponentSignInForm";s:84:"/**
+     * Sign-in form factory.
+     * @return Nette\Application\UI\Form
+     */";}}
