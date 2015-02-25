@@ -7,9 +7,10 @@
     <a n:href="Produkty:novy">Novy produkt</a>
 {/if}
 <div n:foreach="$produkty as $produkt">
+    <img src="{$obrazky[$produkt->id_produktu]|dataStream}" >
     {$produkt->nazev}
     {$produkt->popis}
-    {$produkt->cena}
+    {$produkt->cena} Kč
     {$produkt->id_materialu}
     {$produkt->mnozstvi}
 

@@ -2,9 +2,7 @@
 
 namespace App\Presenters;
 
-use Nette,
-    Nette\Application\UI\Form,
-    Nette\Security\User;
+use Nette;
 
 
 /**

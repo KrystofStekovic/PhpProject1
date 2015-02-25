@@ -2,23 +2,23 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/Produkty/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('3360449591', 'html')
+list($_b, $_g, $_l) = $template->initialize('1280894160', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb7e80ee98d8_content')) { function _lb7e80ee98d8_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb84789fae4a_content')) { function _lb84789fae4a_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;if ($user->isInRole('admin')) { ?>
     <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Produkty:novy"), ENT_COMPAT) ?>
 ">Novy produkt</a>
 <?php } $iterations = 0; foreach ($produkty as $produkt) { ?><div>
+    <img src="<?php echo Latte\Runtime\Filters::escapeHtml($template->dataStream($obrazky[$produkt->id_produktu]), ENT_COMPAT) ?>">
     <?php echo Latte\Runtime\Filters::escapeHtml($produkt->nazev, ENT_NOQUOTES) ?>
 
     <?php echo Latte\Runtime\Filters::escapeHtml($produkt->popis, ENT_NOQUOTES) ?>
 
-    <?php echo Latte\Runtime\Filters::escapeHtml($produkt->cena, ENT_NOQUOTES) ?>
-
+    <?php echo Latte\Runtime\Filters::escapeHtml($produkt->cena, ENT_NOQUOTES) ?> Kč
     <?php echo Latte\Runtime\Filters::escapeHtml($produkt->id_materialu, ENT_NOQUOTES) ?>
 
     <?php echo Latte\Runtime\Filters::escapeHtml($produkt->mnozstvi, ENT_NOQUOTES) ?>

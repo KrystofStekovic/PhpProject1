@@ -9,7 +9,8 @@
 namespace App\Presenters;
 
 use Nette,
-    Nette\Http,
+    Tracy\Debugger,
+    Nette\Utils\Image,
     Nette\Application\UI\Form;
 
 /**
@@ -32,7 +33,14 @@ class ProduktyPresenter extends BasePresenter {
 
     public function renderDefault() {
         $this->produkty = $this->database->table('produkty');
+        $obrazky;
+        foreach ($this->produkty as $produkt) {
+            $obr = Image::fromFile($produkt->ref('obrazky', 'id_obrazku')->adresa);
+            $obr->resize(100, 100);
+            $obrazky[$produkt->id_produktu] = $obr;
+        }
         $this->template->produkty = $this->produkty;
+        $this->template->obrazky = $obrazky;
     }
 
     public function createComponentProduktForm() {
@@ -74,16 +82,30 @@ class ProduktyPresenter extends BasePresenter {
     public function insertProdukt($form, $values) {
 
         $produktId = $this->getParameter('produktId');
+        $adresa = 'images/';
 
         if ($produktId) {
+            if ($values->obrazek) {
+                $file = $values->obrazek;
+                $obrazek['nazev'] = $file->name;
+                $obrazek['adresa'] = $adresa . $file->name;
+                $file->move($adresa.$file->name);
+                $idObr = $this->database->table('produkty')->where('id_produktu', $produktId)->fetch()->ref('obrazky', 'id_obrazku')->id_obrazku;
+                $obr = $this->database->table('obrazky')->get($idObr);
+                $obr->update($obrazek);
+            }
+            unset($values['obrazek']);
             $produkt = $this->database->table('produkty')->get($produktId);
             $produkt->update($values);
             $this->flashMessage('Produkt byl úspěšně upraven.', 'success');
         } else {
             $file = $values->obrazek;
-            $adresa = 'www/images/';
-            $file->move($adresa);
-            $obrazek = $this->database->table('obrazky')->insert($obrazek->name, $adresa . $obrazek->name);
+            $obrazek['nazev'] = $file->name;
+            $obrazek['adresa'] = $adresa . $file->name;
+            $file->move($adresa.$file->name);
+            $obrazek = $this->database->table('obrazky')->insert($obrazek);
+            $values['id_obrazku'] = $obrazek->id_obrazku;
+            unset($values['obrazek']);
             $produkt = $this->database->table('produkty')->insert($values);
             $this->flashMessage('Produkt byl úspěšně vlozen.', 'success');
         }

@@ -2,16 +2,16 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/Produkty/novy.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('4182243423', 'html')
+list($_b, $_g, $_l) = $template->initialize('2268632097', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb064cf1a279_content')) { function _lb064cf1a279_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><h2>Vytvoreni noveho produktu</h2>
-
-<?php $_l->tmp = $_control->getComponent("produktForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+if (!function_exists($_b->blocks['content'][] = '_lb1d8d5d4473_content')) { function _lb1d8d5d4473_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;if ($user->isInRole('admin')) { ?>
+    <h2>Vytvoreni noveho produktu</h2>
+<?php $_l->tmp = $_control->getComponent("produktForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;} 
 }}
 
 //
@@ -34,7 +34,5 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 // main template
 //
-?>
-
-<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
+if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

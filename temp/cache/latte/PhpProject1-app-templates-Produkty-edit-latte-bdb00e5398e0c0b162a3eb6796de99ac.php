@@ -2,16 +2,16 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/Produkty/edit.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('1717178113', 'html')
+list($_b, $_g, $_l) = $template->initialize('5156215774', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb6a85918d55_content')) { function _lb6a85918d55_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><h3>Upravit Produkt</h3>
-
-<?php $_l->tmp = $_control->getComponent("produktForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+if (!function_exists($_b->blocks['content'][] = '_lb54e2389113_content')) { function _lb54e2389113_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;if ($user->isInRole('admin')) { ?>
+    <h3>Upravit Produkt</h3>
+<?php $_l->tmp = $_control->getComponent("produktForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;} 
 }}
 
 //
