@@ -3,9 +3,6 @@
 namespace App\Presenters;
 
 use Nette,
-    Nette\Utils\Strings,
-    Nette\Mail\Message,
-    Nette\Mail\SmtpMailer,
     Nette\Tracy\Debugger,
     App\Model\UserManager;
 
@@ -83,19 +80,6 @@ class SignPresenter extends BasePresenter {
     }
 
     public function addUserFormSucceeded($form, $values) {
-        $values->activ_code = Strings::random(150, 'A-Za-z0-9');
-        $mail = new Message;
-        $mail->setFrom('Franta <tofisk@gmail.com>')
-                ->addTo('krystofstekovic@gmail.com')
-                ->setSubject('Potvrzení registrace')
-                ->setBody($values->activ_code);
-        $mailer = new Nette\Mail\SmtpMailer(array(
-            'host' => 'smtp.gmail.com',
-            'username' => 'tofisk@gmail.com',
-            'password' => 'rh7u5b24h',
-            'secure' => 'ssl',
-        ));
-        $mailer->send($mail);
         $this->userManager->add($values->email, $values->heslo);
         $this->flashMessage('Uspesna registrace.', 'success');
         $this->redirect('Homepage:');
@@ -105,6 +89,10 @@ class SignPresenter extends BasePresenter {
         $this->user->logout();
         $this->flashMessage('Byl jste odhlasen.');
         $this->redirect('in');
+    }
+    
+    public function actionAktivUser($activCode){
+        
     }
 
 }

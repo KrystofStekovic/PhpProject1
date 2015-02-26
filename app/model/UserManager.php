@@ -3,6 +3,9 @@
 namespace App\Model;
 
 use Nette,
+    Nette\Utils\Strings,
+    Nette\Mail\Message,
+    Nette\Mail\SmtpMailer,
     Nette\Security\Passwords;
 
 /**
@@ -15,7 +18,9 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
             COLUMN_ID = 'id_uzivatele',
             COLUMN_NAME = 'email',
             COLUMN_PASSWORD_HASH = 'heslo',
-            COLUMN_ROLE = 'role';
+            COLUMN_ROLE = 'role',
+            COLUMN_ACTIVED = 'actived',
+            COLUMN_ACTIV_CODE = 'activ_code';
 
     /** @var Nette\Database\Context */
     private $database;
@@ -56,9 +61,27 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
      * @return void
      */
     public function add($username, $password) {
+        $params = array(
+            'activCode' => Strings::random(150, 'A-Za-z0-9'));
+        $latte = new Nette\Latte\Engine;
+        $latte->renderToString('registremail.latte', $params);
+//        $template = $this->createTemplate()->setFile('registrEmail.latte');
+        $mail = new Message;
+        $mail->setFrom('Franta <tofisk@gmail.com>')
+                ->addTo($username)
+                ->setSubject('Potvrzení registrace')
+                ->setBody($latte);
+        $mailer = new Nette\Mail\SmtpMailer(array(
+            'host' => 'smtp.gmail.com',
+            'username' => 'tofisk@gmail.com',
+            'password' => 'rh7u5b24h',
+            'secure' => 'ssl',
+        ));
+        $mailer->send($mail);
         $this->database->table(self::TABLE_NAME)->insert(array(
             self::COLUMN_NAME => $username,
             self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
+            self::COLUMN_ACTIV_CODE => $$params->activ_code
         ));
     }
 
