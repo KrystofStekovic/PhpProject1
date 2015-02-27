@@ -63,14 +63,15 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
     public function add($username, $password) {
         $params = array(
             'activCode' => Strings::random(150, 'A-Za-z0-9'));
-        $latte = new Nette\Latte\Engine;
-        $latte->renderToString('registremail.latte', $params);
+//        $latte = new Nette\Latte\Engine;
+//        $latte->renderToString('registremail.latte', $params);
 //        $template = $this->createTemplate()->setFile('registrEmail.latte');
+        $html = '<a href="http://localhost/PhpProject1/www/Sign/activUser?activCode='.$params['activCode'].'">';
         $mail = new Message;
         $mail->setFrom('Franta <tofisk@gmail.com>')
-                ->addTo($username)
+                ->addTo('krystofstekovic@gmail.com')
                 ->setSubject('Potvrzení registrace')
-                ->setBody($latte);
+                ->setBody('neco');
         $mailer = new Nette\Mail\SmtpMailer(array(
             'host' => 'smtp.gmail.com',
             'username' => 'tofisk@gmail.com',
@@ -81,7 +82,7 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
         $this->database->table(self::TABLE_NAME)->insert(array(
             self::COLUMN_NAME => $username,
             self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
-            self::COLUMN_ACTIV_CODE => $$params->activ_code
+            self::COLUMN_ACTIV_CODE => $params->activ_code
         ));
     }
 

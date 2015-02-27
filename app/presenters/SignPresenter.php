@@ -3,7 +3,8 @@
 namespace App\Presenters;
 
 use Nette,
-    Nette\Tracy\Debugger,
+    Nette\Utils\Strings,
+    Tracy\Debugger,
     App\Model\UserManager;
 
 /**
@@ -75,14 +76,18 @@ class SignPresenter extends BasePresenter {
             $this->flashMessage('Uspesne prihlaseni.', 'success');
             $this->redirect('Homepage:');
         } catch (Nette\Security\AuthenticationException $e) {
-            $form->addError($e->getMessage());
+            $form->addError($e->getTrace());
         }
     }
 
     public function addUserFormSucceeded($form, $values) {
+//        try{
         $this->userManager->add($values->email, $values->heslo);
         $this->flashMessage('Uspesna registrace.', 'success');
         $this->redirect('Homepage:');
+//        } catch (Nette\Mail\SmtpException $e){
+//            Debugger::dump($e->getMessage());
+//        }
     }
 
     public function actionOut() {
@@ -91,8 +96,8 @@ class SignPresenter extends BasePresenter {
         $this->redirect('in');
     }
     
-    public function actionAktivUser($activCode){
-        
+    public function renderAktivUser($activCode){
+        $this->template->code = $activCode;
     }
 
 }
