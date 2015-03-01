@@ -2,20 +2,13 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('0891727466', 'html')
+list($_b, $_g, $_l) = $template->initialize('5096363699', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
-// block head
-//
-if (!function_exists($_b->blocks['head'][] = '_lbcf680ac049_head')) { function _lbcf680ac049_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;
-}}
-
-//
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lbca7bdaf46c_scripts')) { function _lbca7bdaf46c_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lb9327889ff7_scripts')) { function _lb9327889ff7_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>        <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
         <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
         <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
@@ -47,19 +40,13 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <html>
     <head>
         <meta charset="utf-8">
-
-        <title><?php if (isset($_b->blocks["title"])) { ob_start(); Latte\Macros\BlockMacros::callBlock($_b, 'title', $template->getParameters()); echo $template->striptags(ob_get_clean()) ?>
- | <?php } ?>Bio-Culture</title>
-
+        <title>Bio-Culture</title>
         <link rel="stylesheet" type="text/css" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/screen.css">
         <link rel="shortcut icon" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/favicon.ico">
-        <?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
-call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
-
     </head>
 
     <body>
-        <div class="logo">
+        <header>
             <div class="login">
 <?php if ($user->isLoggedIn()) { ?>
                     <div class="loginLine">
@@ -67,20 +54,31 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 ">Odhlasit</a>
                     </div>
 <?php } else { ?>
-                    
-<?php $_l->tmp = $_control->getComponent("signInForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
-                    <div class="loginLine">
-                        <a class="loginLine" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Sign:in"), ENT_COMPAT) ?>
-">Prihlasit</a>
-                    </div>
-                    <div class="loginLine">
-                        <a class="loginLine" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Sign:novy"), ENT_COMPAT) ?>
-">Registrace</a>
-                    </div>
+                    <?php Nette\Bridges\FormsLatte\FormMacros::renderFormBegin($form = $_form = $_control["signInForm"], array()) ?>
+
+                        <table>
+                            <tr class="required">
+                                <td><?php if ($_label = $_form["email"]->getLabel()) echo $_label  ?></td>
+                                <td><?php echo $_form["email"]->getControl() ?></td>
+                            </tr>
+                            <tr class="required">
+                                <td><?php if ($_label = $_form["heslo"]->getLabel()) echo $_label  ?></td>
+                                <td><?php echo $_form["heslo"]->getControl() ?></td>
+                            </tr>
+                            <td colspan="2">
+                                <?php echo $_form["send"]->getControl() ?>
+
+                                <button formaction="Sign/novy">Registrace</button>
+                            </td>
+                            </tr>
+                        </table>
+                    <?php Nette\Bridges\FormsLatte\FormMacros::renderFormEnd($_form) ?>
+
 <?php } ?>
             </div>
-        </div>
-        <div class="menu">
+        </header>
+            
+        <nav>
             <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Homepage:default"), ENT_COMPAT) ?>
 ">Hlavni Stranka</a> 
             <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:default"), ENT_COMPAT) ?>
@@ -95,7 +93,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
                 <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:default"), ENT_COMPAT) ?>
 ">Materialy</a>
 <?php } ?>
-        </div>
+        </nav>
 
         <script> document.documentElement.className += ' js'</script>
 
@@ -107,6 +105,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 <?php Latte\Macros\BlockMacros::callBlock($_b, 'content', $template->getParameters()) ?>
         </div>
 
-<?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
+<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
+call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
     </body>
 </html>

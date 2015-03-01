@@ -7,34 +7,41 @@
 <html>
     <head>
         <meta charset="utf-8">
-
-        <title>{ifset #title}{include title|striptags} | {/ifset}Bio-Culture</title>
-
+        <title>Bio-Culture</title>
         <link rel="stylesheet" type="text/css" href="{$basePath}/css/screen.css">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-        {block head}{/block}
     </head>
 
     <body>
-        <div class="logo">
+        <header>
             <div class="login">
                 {if $user->isLoggedIn()}
                     <div class="loginLine">
                         <a class="loginLine" n:href="Sign:out">Odhlasit</a>
                     </div>
                 {else}
-                    
-{control signInForm}
-                    <div class="loginLine">
-                        <a class="loginLine" n:href="Sign:in">Prihlasit</a>
-                    </div>
-                    <div class="loginLine">
-                        <a class="loginLine" n:href="Sign:novy">Registrace</a>
-                    </div>
+                    {form signInForm}
+                        <table>
+                            <tr class="required">
+                                <td>{label email /}</td>
+                                <td>{input email}</td>
+                            </tr>
+                            <tr class="required">
+                                <td>{label heslo /}</td>
+                                <td>{input heslo}</td>
+                            </tr>
+                            <td colspan="2">
+                                {input send}
+                                <button formaction="Sign/novy">Registrace</button>
+                            </td>
+                            </tr>
+                        </table>
+                    {/form}
                 {/if}
             </div>
-        </div>
-        <div class="menu">
+        </header>
+            
+        <nav>
             <a class="prvekMenu" n:href="Homepage:default">Hlavni Stranka</a> 
             <a class="prvekMenu" n:href="Clanky:default">Clanky</a>
             <a class="prvekMenu" n:href="Aktuality:default">Aktuality</a>
@@ -43,7 +50,7 @@
             {if $user->isInRole('admin')}          
                 <a class="prvekMenu" n:href="Materialy:default">Materialy</a>
             {/if}
-        </div>
+        </nav>
 
         <script> document.documentElement.className += ' js'</script>
 

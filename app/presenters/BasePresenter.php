@@ -2,17 +2,15 @@
 
 namespace App\Presenters;
 
-use Nette;
-
+use Nette,
+    Nette\Application\UI\Form;
 
 /**
  * Base presenter for all application presenters.
  */
-abstract class BasePresenter extends Nette\Application\UI\Presenter
-{
+abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     protected $database;
-    
 
     /**
      * Sign-in form factory.
@@ -27,12 +25,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $form->addPassword('heslo', 'heslo:')
                 ->setRequired('Napis svoje heslo.');
 
-        //$form->addCheckbox('remember', 'Keep me signed in');
-
         $form->addSubmit('send', 'Prihlasit');
 
         // call method signInFormSucceeded() on success
         $form->onSuccess[] = array($this, 'signInFormSucceeded');
+//        $form['reg']->getControlPrototype()->class('Sign:novy');
         return $form;
     }
 

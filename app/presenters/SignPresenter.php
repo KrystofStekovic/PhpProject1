@@ -3,9 +3,7 @@
 namespace App\Presenters;
 
 use Nette,
-    Nette\Utils\Strings,
-    Tracy\Debugger,
-    App\Model\UserManager;
+    Nette\Application\UI\Form;
 
 /**
  * Sign in/out presenters.
