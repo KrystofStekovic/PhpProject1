@@ -2,16 +2,16 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5096363699', 'html')
+list($_b, $_g, $_l) = $template->initialize('5176419891', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lb9327889ff7_scripts')) { function _lb9327889ff7_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?>        <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
-        <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
-        <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
+if (!function_exists($_b->blocks['scripts'][] = '_lbbc069c5ea4_scripts')) { function _lbbc069c5ea4_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?>            <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
+            <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
+            <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
 <?php
 }}
 
@@ -77,35 +77,38 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <?php } ?>
             </div>
         </header>
-            
-        <nav>
-            <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Homepage:default"), ENT_COMPAT) ?>
+        <div id="container">
+            <nav>
+                <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Homepage:default"), ENT_COMPAT) ?>
 ">Hlavni Stranka</a> 
-            <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:default"), ENT_COMPAT) ?>
+                <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Clanky:default"), ENT_COMPAT) ?>
 ">Clanky</a>
-            <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Aktuality:default"), ENT_COMPAT) ?>
+                <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Aktuality:default"), ENT_COMPAT) ?>
 ">Aktuality</a>
-            <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Produkty:default"), ENT_COMPAT) ?>
+                <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Produkty:default"), ENT_COMPAT) ?>
 ">Produkty</a>
-            <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Objednavky:default"), ENT_COMPAT) ?>
+                <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Objednavky:default"), ENT_COMPAT) ?>
 ">Objednavky</a>
 <?php if ($user->isInRole('admin')) { ?>
-                <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:default"), ENT_COMPAT) ?>
+                    <a class="prvekMenu" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:default"), ENT_COMPAT) ?>
 ">Materialy</a>
 <?php } ?>
-        </nav>
+            </nav>
 
-        <script> document.documentElement.className += ' js'</script>
-
-<?php $iterations = 0; foreach ($flashes as $flash) { ?>        <div class="flash <?php echo Latte\Runtime\Filters::escapeHtml($flash->type, ENT_COMPAT) ?>
+<?php $iterations = 0; foreach ($flashes as $flash) { ?>            <div class="flash <?php echo Latte\Runtime\Filters::escapeHtml($flash->type, ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></div>
 <?php $iterations++; } ?>
 
-        <div class="obsah">
+            <section>
 <?php Latte\Macros\BlockMacros::callBlock($_b, 'content', $template->getParameters()) ?>
-        </div>
+            </section>
+
+            <footer>
+                Vsechna prava vyhrazena.
+            </footer>
 
 <?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
+        </div>
     </body>
 </html>

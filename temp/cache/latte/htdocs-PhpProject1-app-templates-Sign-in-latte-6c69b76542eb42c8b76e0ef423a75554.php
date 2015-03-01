@@ -2,13 +2,13 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/Sign/in.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('4386326878', 'html')
+list($_b, $_g, $_l) = $template->initialize('7544261599', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lba1f957f9fe_content')) { function _lba1f957f9fe_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb8615b66ba3_content')) { function _lb8615b66ba3_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><h2>Prihlaseni</h2>
 
 <?php $_l->tmp = $_control->getComponent("signInForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>

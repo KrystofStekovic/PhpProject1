@@ -40,30 +40,33 @@
                 {/if}
             </div>
         </header>
-            
-        <nav>
-            <a class="prvekMenu" n:href="Homepage:default">Hlavni Stranka</a> 
-            <a class="prvekMenu" n:href="Clanky:default">Clanky</a>
-            <a class="prvekMenu" n:href="Aktuality:default">Aktuality</a>
-            <a class="prvekMenu" n:href="Produkty:default">Produkty</a>
-            <a class="prvekMenu" n:href="Objednavky:default">Objednavky</a>
-            {if $user->isInRole('admin')}          
-                <a class="prvekMenu" n:href="Materialy:default">Materialy</a>
-            {/if}
-        </nav>
+        <div id="container">
+            <nav>
+                <a class="prvekMenu" n:href="Homepage:default">Hlavni Stranka</a> 
+                <a class="prvekMenu" n:href="Clanky:default">Clanky</a>
+                <a class="prvekMenu" n:href="Aktuality:default">Aktuality</a>
+                <a class="prvekMenu" n:href="Produkty:default">Produkty</a>
+                <a class="prvekMenu" n:href="Objednavky:default">Objednavky</a>
+                {if $user->isInRole('admin')}          
+                    <a class="prvekMenu" n:href="Materialy:default">Materialy</a>
+                {/if}
+            </nav>
 
-        <script> document.documentElement.className += ' js'</script>
+            <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
-        <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+            <section>
+                {include content}
+            </section>
 
-        <div class="obsah">
-            {include content}
+            <footer>
+                Vsechna prava vyhrazena.
+            </footer>
+
+            {block scripts}
+            <script src="{$basePath}/js/jquery.js"></script>
+            <script src="{$basePath}/js/netteForms.js"></script>
+            <script src="{$basePath}/js/main.js"></script>
+            {/block}
         </div>
-
-        {block scripts}
-        <script src="{$basePath}/js/jquery.js"></script>
-        <script src="{$basePath}/js/netteForms.js"></script>
-        <script src="{$basePath}/js/main.js"></script>
-        {/block}
     </body>
 </html>

@@ -2,16 +2,19 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/Homepage/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5644009690', 'html')
+list($_b, $_g, $_l) = $template->initialize('2465902485', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb63261d643d_content')) { function _lb63261d643d_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><h2>Hlavni strana</h2>
-
-obsah hlavni stranky<?php
+if (!function_exists($_b->blocks['content'][] = '_lb9973a89a41_content')) { function _lb9973a89a41_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+?><article>
+    <header class="obsah">
+        <h1>Hlavni strana</h1>
+    </header>
+    <p>obsah hlavni stranky</p>
+</article><?php
 }}
 
 //
@@ -34,7 +37,5 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 // main template
 //
-?>
-
-<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
+if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 

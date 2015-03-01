@@ -1,20 +1,18 @@
 {* Latte template *}
 
 {block content}
-{if $user->isInRole('admin')}
-    <a n:href="Aktuality:nova">Nova aktualita</a>
-{/if}
 
-
-<div n:foreach="$aktuality as $aktualita" class="aktualita">
-    <div class="date">{$aktualita->datum|date:'j. n. Y'}</div>
-
-    <h3>{$aktualita->nadpis}</h3>
-
+<article n:foreach="$aktuality as $aktualita">
+    <header class="obsah">
+        <h1>{$aktualita->nadpis}</h1>
+    </header>
     {if $user->isInRole('admin')}
-        <a n:href="Aktuality:edit $aktualita->id_aktuality">Editovat</a>
-        <a n:href="Aktuality:delete $aktualita->id_aktuality">Smazat</a>
+        <nav>
+            <a n:href="Aktuality:edit $aktualita->id_aktuality">Editovat</a>
+            <a n:href="Aktuality:delete $aktualita->id_aktuality">Smazat</a>
+            <a n:href="Aktuality:nova">Nova aktualita</a>
+        </nav>
     {/if}
-
-    <div>{$aktualita->text}</div>
-</div>
+    <p>{$aktualita->datum|date:'j. n. Y'}</p>
+    <p>{$aktualita->text}</p>
+</article>
