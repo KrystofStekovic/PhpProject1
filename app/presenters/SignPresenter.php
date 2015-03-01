@@ -32,7 +32,7 @@ class SignPresenter extends BasePresenter {
      * Sign-in form factory.
      * @return Nette\Application\UI\Form
      */
-    protected function createComponentSignInForm() {
+    public function createComponentSignInForm() {
         $form = new Nette\Application\UI\Form;
         $form->addText('email', 'Email:')
                 ->setRequired('Napis svuj mail');
