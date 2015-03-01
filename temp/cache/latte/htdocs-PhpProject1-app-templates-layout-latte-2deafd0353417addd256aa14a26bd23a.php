@@ -2,20 +2,20 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/@layout.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('9509387024', 'html')
+list($_b, $_g, $_l) = $template->initialize('0891727466', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block head
 //
-if (!function_exists($_b->blocks['head'][] = '_lbaf691322f0_head')) { function _lbaf691322f0_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['head'][] = '_lbcf680ac049_head')) { function _lbcf680ac049_head($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_b->blocks['scripts'][] = '_lba40a6516ad_scripts')) { function _lba40a6516ad_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['scripts'][] = '_lbca7bdaf46c_scripts')) { function _lbca7bdaf46c_scripts($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?>        <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/jquery.js"></script>
         <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/netteForms.js"></script>
         <script src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/js/main.js"></script>
@@ -67,6 +67,8 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 ">Odhlasit</a>
                     </div>
 <?php } else { ?>
+                    
+<?php $_l->tmp = $_control->getComponent("signInForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
                     <div class="loginLine">
                         <a class="loginLine" href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Sign:in"), ENT_COMPAT) ?>
 ">Prihlasit</a>

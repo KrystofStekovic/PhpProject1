@@ -28,37 +28,18 @@ class SignPresenter extends BasePresenter {
         $this->database = $database;
     }
 
-    /**
-     * Sign-in form factory.
-     * @return Nette\Application\UI\Form
-     */
-    public function createComponentSignInForm() {
-        $form = new Nette\Application\UI\Form;
-        $form->addText('email', 'Email:')
-                ->setRequired('Napis svuj mail');
-
-        $form->addPassword('heslo', 'heslo:')
-                ->setRequired('Napis svoje heslo.');
-
-        //$form->addCheckbox('remember', 'Keep me signed in');
-
-        $form->addSubmit('send', 'Prihlasit');
-
-        // call method signInFormSucceeded() on success
-        $form->onSuccess[] = array($this, 'signInFormSucceeded');
-        return $form;
-    }
-
     protected function createComponentNewUserForm() {
         $form = new Nette\Application\UI\Form;
         $form->addText('email', 'Email:')
-                ->setRequired('Napis svuj mail');
+                ->setRequired('Napis svuj mail')
+                ->addRule(Form::EMAIL, 'zadej spravne email');
 
         $form->addPassword('heslo', 'heslo:')
                 ->setRequired('Napis svoje heslo.');
 
         $form->addPassword('hesloZnova', 'zopakovat heslo:')
-                ->setRequired('Napis svoje heslo.');
+                ->setRequired('Napis svoje heslo.')
+                ->addRule(Form::EQUAL, 'Hesla se neshodují', $form['heslo']);
 
         //$form->addCheckbox('remember', 'Keep me signed in');
 
@@ -67,17 +48,6 @@ class SignPresenter extends BasePresenter {
         // call method signInFormSucceeded() on success
         $form->onSuccess[] = array($this, 'addUserFormSucceeded');
         return $form;
-    }
-
-    public function signInFormSucceeded($form, $values) {
-
-        try {
-            $this->user->login($values->email, $values->heslo);
-            $this->flashMessage('Uspesne prihlaseni.', 'success');
-            $this->redirect('Homepage:');
-        } catch (Nette\Security\AuthenticationException $e) {
-            $form->addError($e->getTrace());
-        }
     }
 
     public function addUserFormSucceeded($form, $values) {
@@ -95,8 +65,8 @@ class SignPresenter extends BasePresenter {
         $this->flashMessage('Byl jste odhlasen.');
         $this->redirect('in');
     }
-    
-    public function renderAktivUser($activCode){
+
+    public function renderAktivUser($activCode) {
         $this->template->code = $activCode;
     }
 
