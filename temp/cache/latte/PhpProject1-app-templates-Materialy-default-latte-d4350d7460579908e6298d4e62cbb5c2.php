@@ -2,29 +2,28 @@
 // source: C:\xampp\htdocs\PhpProject1\app/templates/Materialy/default.latte
 
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('5608683819', 'html')
+list($_b, $_g, $_l) = $template->initialize('8442285081', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lb8745e46cd4_content')) { function _lb8745e46cd4_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:novy"), ENT_COMPAT) ?>
+if (!function_exists($_b->blocks['content'][] = '_lb90efb2127c_content')) { function _lb90efb2127c_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;if ($user->isInRole('admin')) { ?>
+    <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:novy"), ENT_COMPAT) ?>
 ">Novy material</a>
-
-<table>
-<?php $iterations = 0; foreach ($materialy as $material) { ?>    <tr>
-        <td><?php echo Latte\Runtime\Filters::escapeHtml($material->nazev, ENT_NOQUOTES) ?></td>
-        <td><?php echo Latte\Runtime\Filters::escapeHtml($material->mnozstvi, ENT_NOQUOTES) ?></td>
-        <td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:edit", array($material->id_materialu)), ENT_COMPAT) ?>
+    <table>
+<?php $iterations = 0; foreach ($materialy as $material) { ?>        <tr>
+            <td><?php echo Latte\Runtime\Filters::escapeHtml($material->nazev, ENT_NOQUOTES) ?></td>
+            <td><?php echo Latte\Runtime\Filters::escapeHtml($material->mnozstvi, ENT_NOQUOTES) ?></td>
+            <td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:edit", array($material->id_materialu)), ENT_COMPAT) ?>
 ">Editovat</a></td>
-        <td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:delete", array($material->id_materialu)), ENT_COMPAT) ?>
+            <td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Materialy:delete", array($material->id_materialu)), ENT_COMPAT) ?>
 ">Smazat</a></td>
-        
-
-    </tr>
+        </tr>
 <?php $iterations++; } ?>
-</table><?php
+    </table>
+<?php } 
 }}
 
 //
@@ -47,7 +46,5 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 //
 // main template
 //
-?>
-
-<?php if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
+if ($_l->extends) { ob_end_clean(); return $template->renderChildTemplate($_l->extends, get_defined_vars()); }
 call_user_func(reset($_b->blocks['content']), $_b, get_defined_vars()) ; 
