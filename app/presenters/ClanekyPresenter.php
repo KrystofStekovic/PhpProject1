@@ -48,10 +48,10 @@ class ClankyPresenter extends BasePresenter {
         if ($ClanekId) {
             $clanek = $this->database->table('clanky')->get($ClanekId);
             $clanek->update($values);
-            $this->flashMessage('Clanek byl úspěšně upraven.', 'success');
+            $this->flashMessage('Članek byl úspěšně upraven.', 'success');
         } else {
             $clanek = $this->database->table('clanky')->insert($values);
-            $this->flashMessage('Clanek byl úspěšně vlozen.', 'success');
+            $this->flashMessage('Članek byl úspěšně vlozen.', 'success');
         }
         $this->redirect('this');
     }
