@@ -2,8 +2,14 @@
 
 {block content}
 
-<div class="date">{$clanek->datum|date:'F j, Y'}</div>
-
-<h1 n:block="title">{$clanek->nadpis}</h1>
-
-<div class="post">{$clanek->text}</div>
+<article>
+    <header class="obsah">
+        {$clanek->nadpis}
+    </header>
+    <p>
+        {$clanek->datum|date:'F j, Y'}
+    </p>
+    <div class="post">
+        {!$clanek->text}
+    </div>
+</article>

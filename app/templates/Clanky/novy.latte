@@ -2,6 +2,24 @@
 
 {block content}
 {if $user->isInRole('admin')}
-    <h2>Vytvoreni noveho clanku</h2>
-    {control clanekForm}
+    <article>
+        <header class="obsah">
+            <h1>Nový článek</h1>
+        </header>
+
+        {form clanekForm}
+            <table align="center">
+                <tr class="required">
+                    <td>{label nadpis /}</td>
+                    <td>{input nadpis}</td>
+                </tr>
+                <tr class="required">
+                    <td colspan="2">{input text}</td>
+                </tr>
+                    <td></td>
+                    <td>{input send}</td>
+                </tr>
+            </table>
+        {/form}
+    </article>
 {/if}

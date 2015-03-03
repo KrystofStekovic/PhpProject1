@@ -2,20 +2,18 @@
 
 {block content}
 
-
-{if $user->isInRole('admin')}
-    <a n:href="Clanky:novy">Novy clanek</a>
-{/if}
-
-<div n:foreach="$clanky as $clanek" class="post">
-    <div class="date">{$clanek->datum|date:'j. n. Y'}</div>
-
-    <h3><a n:href="Clanky:detail $clanek->id_clanku">{$clanek->nadpis}</a></h3>
+<article n:foreach="$clanky as $clanek" class="post">
+    <header class="obsah">
+        <a n:href="Clanky:detail $clanek->id_clanku">{$clanek->nadpis}
+    </header>
 
     {if $user->isInRole('admin')}
-        <a n:href="Clanky:edit $clanek->id_clanku">Editovat</a>
-        <a n:href="Clanky:delete $clanek->id_clanku">Smazat</a>
+        <nav>
+            <a n:href="Clanky:edit $clanek->id_clanku">Editovat</a>
+            <a n:href="Clanky:delete $clanek->id_clanku">Smazat</a>
+    <a n:href="Clanky:novy">Novy clanek</a>
+        </nav>
     {/if}
-
-    <div>{$clanek->text|truncate:25}</div>
-</div>
+    <p>{$clanek->datum|date:'j. n. Y'}</p>
+    <p>{!$clanek->text|truncate:25}</p>
+</article>

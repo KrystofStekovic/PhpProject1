@@ -35,7 +35,8 @@ class ClankyPresenter extends BasePresenter {
         $form->addText('nadpis', 'Nadpis:')
                 ->setRequired();
         $form->addTextArea('text', 'Text:')
-                ->setRequired();
+                ->setRequired()
+                ->getControlPrototype()->setClass('ckeditor');
         $form->addSubmit('send', 'Ulozit clanek');
         $form->onSuccess[] = array($this, 'insertClanek');
         return $form;
