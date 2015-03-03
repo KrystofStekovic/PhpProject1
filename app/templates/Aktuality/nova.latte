@@ -2,6 +2,25 @@
 
 {block content}
 {if $user->isInRole('admin')}
-    <h2>Vytvoreni nove aktuality</h2>
-    {control aktualitaForm}
+    <article>
+        <header class="obsah">
+            <h1>Upravit Clanek</h1>
+        </header>
+
+        {form aktualitaForm}
+            <table align="center">
+                <tr class="required">
+                    <td>{label nadpis /}</td>
+                    <td>{input nadpis}</td>
+                </tr>
+                <tr class="required">
+                    <td>{label text /}</td>
+                    <td>{input text}</td>
+                </tr>
+                    <td></td>
+                    <td>{input send}</td>
+                </tr>
+            </table>
+        {/form}
+    </article>
 {/if}
