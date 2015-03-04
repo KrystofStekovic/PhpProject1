@@ -52,7 +52,9 @@ class KosikManager extends Nette\Object {
     }
 
     public function getObsahKosiku($idKosiku) {
-        $sql = 'SELECT 
+        $sql = 'SELECT
+            id_produktu,
+            id_kosiku,
             datum_vytvoreni, 
             produkty.nazev AS produkt, 
             zbozi_kosik.mnozstvi AS mnozstvi,
