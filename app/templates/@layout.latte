@@ -14,8 +14,6 @@
 
     <body>
         <header>
-            
-            
             <nav>
                 <a class="prvekMenu" n:href="Homepage:default">Hlavni Stranka</a> 
                 <a class="prvekMenu" n:href="Clanky:default">Clanky</a>
@@ -25,31 +23,14 @@
                 {if $user->isInRole('admin')}          
                     <a class="prvekMenu" n:href="Materialy:default">Materialy</a>
                 {/if}
+                {if $user->isLoggedIn()}
+                    <a class="prvekMenu" n:href="Sign:out">Odhlasit</a>
+                {else}
+                    <a class="prvekMenu" n:href="Sign:in">Přihlásit</a>
+                    <a class="prvekMenu" n:href="Sign:out">Registrovat</a>
+                {/if}
             </nav>
             <div class="login">
-                {if $user->isLoggedIn()}
-                    <div class="loginLine">
-                        <a class="loginLine" n:href="Sign:out">Odhlasit</a>
-                    </div>
-                {else}
-                    {form signInForm}
-                        <table>
-                            <tr class="required">
-                                <td>{label email /}</td>
-                                <td>{input email}</td>
-                            </tr>
-                            <tr class="required">
-                                <td>{label heslo /}</td>
-                                <td>{input heslo}</td>
-                            </tr>
-                            <td colspan="2">
-                                {input send}
-                                <button formaction="Sign/novy">Registrace</button>
-                            </td>
-                            </tr>
-                        </table>
-                    {/form}
-                {/if}
             </div>
         </header>
         <div id="container">

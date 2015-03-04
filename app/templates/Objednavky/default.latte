@@ -2,9 +2,25 @@
 
 {block content}
 
-<div n:foreach="$kosiky as $kosik">
-    Datum vytvoreni: {$kosik->datum_vytvoreni|date:'j. n. Y G:i'}<br>
-    Pocet produktu v kosiku: {$kosik->produkty}<br>
-    Celkova cena kosiku: {$kosik->suma} 
-    <hr>
-</div>
+<article>
+    <header class="obsah">
+        <h1>Prehled objednavek</h1>
+    </header>
+    <table style="width:100%">
+        <tr>
+            <th>Datum vytvoreni</th>
+            <th>Pocet produktu v kosiku</th> 
+            <th>Celkova cena kosiku</th>
+            <th></th>
+        </tr>
+        <tr n:foreach="$kosiky as $kosik">
+            <td>{$kosik->datum_vytvoreni|date:'j. n. Y G:i'}</td>
+            <td>{$kosik->produkty}</td>
+            <td>{$kosik->suma}</td>
+            <td>
+                <a n:href="Objednavky:detail $kosik->id_kosiku">Detail</a>
+            </td>
+        </tr>
+    </table>
+</article>
+

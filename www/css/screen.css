@@ -59,7 +59,7 @@ nav a {
     /*background-color: fuchsia;*/
     background-image: url(../images/tl_bila.png);
     background-repeat: no-repeat;
-    background-position: center center;    
+    background-position: center top;    
 }
 
 article{
@@ -88,7 +88,7 @@ article nav a{
 
 .login{
     position: relative;
-    top: 30px;
+    height: 30px;
     float: right;
     width: 220px;
 }
@@ -100,4 +100,8 @@ div.flash {
 	border: 1px solid #E2C822;
 	padding: 1em;
 	margin: 1em 0;
+}
+
+table {
+    text-align: center;
 }
