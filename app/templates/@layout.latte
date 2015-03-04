@@ -14,6 +14,18 @@
 
     <body>
         <header>
+            
+            
+            <nav>
+                <a class="prvekMenu" n:href="Homepage:default">Hlavni Stranka</a> 
+                <a class="prvekMenu" n:href="Clanky:default">Clanky</a>
+                <a class="prvekMenu" n:href="Aktuality:default">Aktuality</a>
+                <a class="prvekMenu" n:href="Produkty:default">Produkty</a>
+                <a class="prvekMenu" n:href="Objednavky:default">Objednavky</a>
+                {if $user->isInRole('admin')}          
+                    <a class="prvekMenu" n:href="Materialy:default">Materialy</a>
+                {/if}
+            </nav>
             <div class="login">
                 {if $user->isLoggedIn()}
                     <div class="loginLine">
@@ -41,16 +53,6 @@
             </div>
         </header>
         <div id="container">
-            <nav>
-                <a class="prvekMenu" n:href="Homepage:default">Hlavni Stranka</a> 
-                <a class="prvekMenu" n:href="Clanky:default">Clanky</a>
-                <a class="prvekMenu" n:href="Aktuality:default">Aktuality</a>
-                <a class="prvekMenu" n:href="Produkty:default">Produkty</a>
-                <a class="prvekMenu" n:href="Objednavky:default">Objednavky</a>
-                {if $user->isInRole('admin')}          
-                    <a class="prvekMenu" n:href="Materialy:default">Materialy</a>
-                {/if}
-            </nav>
 
             <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 

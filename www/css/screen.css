@@ -11,8 +11,7 @@ body {
 }
 
 a , a:visited {
-    top: 5px;
-    color: green;
+    top: 7px;
     text-decoration: none;
     text-align: center;
     padding-top: 3px;
@@ -28,10 +27,12 @@ a:active {
 }
 
 header{
+    color: black;
+    font-weight: bold;
     background-image: url(../images/head.png);
     background-repeat: no-repeat;
     background-position: center center;
-    height: 237px;
+    height: 130px;
 }
 
 header.obsah{
@@ -41,9 +42,11 @@ header.obsah{
 }
 
 nav{
+    position: relative;
+    top: 15px;
     text-align: center;
     /*background-color: yellow;*/
-    background-image: url(../images/vlna.png);
+    /*background-image: url(../images/vlna.png);*/
     background-repeat: no-repeat;
     background-position: center center;
     height: 30px;
