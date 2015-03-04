@@ -5,7 +5,7 @@ body {
     color: #333;
     background: whitesmoke;
     text-align: center;
-    width: 1237px;
+    width: 1270px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -36,9 +36,11 @@ header{
 }
 
 header.obsah{
+    position: relative;
+    top: 30px;
     text-align: center;
     background: none;
-    height: auto;
+    height: 60px;
 }
 
 nav{
@@ -64,10 +66,10 @@ nav a {
 
 article{
     position: relative;
-    left: 20%;
+    left: 5%;
     text-align: left;
     background: none;
-    width: 60%;
+    width: 90%;
     height: auto;
 }
 
@@ -85,6 +87,13 @@ article nav a{
 
 #frm-signInForm-email { width: 150px}
 #frm-signInForm-heslo{ width:  150px}
+
+#container{
+    background-image: url(../images/fotka_pozadi.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 661px;
+}
 
 .login{
     position: relative;
@@ -104,4 +113,19 @@ div.flash {
 
 table {
     text-align: center;
+}
+
+section {
+    background-image: url(../images/text_pole.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin-left: auto;
+    margin-right: auto;
+    width: 930px;
+    height: 620px;
+}
+
+footer {
+    color: white;
+    font-weight: bold;
 }
