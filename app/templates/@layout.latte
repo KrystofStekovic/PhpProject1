@@ -35,9 +35,9 @@
         </header>
         <div id="container">
 
-            <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-
             <section>
+
+                <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
                 {include content}
             </section>
 
