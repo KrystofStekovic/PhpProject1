@@ -93,7 +93,9 @@ class KosikManager extends Nette\Object {
     }
 
     public function smazProdukt($idProduktu, $idkosiku) {
-        
+        $this->database->table(self::TABLE_NAME_ZBOZI_KOSIKU)
+                ->where(self::COLUMN_ID_ZBOZI . " = " . $idProduktu . " AND " . self::COLUMN_ID_KOSIKU . " = " . $idkosiku)
+                ->delete();
     }
 
 }
