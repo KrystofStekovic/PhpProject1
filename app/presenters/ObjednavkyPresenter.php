@@ -24,11 +24,12 @@ class ObjednavkyPresenter extends BasePresenter{
     public $kosikManager;
     
     public function renderDefault() {
-        $this->template->kosiky = $this->kosikManager->getPrehledKosiku($this->user);
+        $this->template->kosiky = $this->kosikManager->getPrehledKosiku($this->user, null);
     }
     
     public function renderDetail($idKosiku) {
         $this->template->produkty = $this->kosikManager->getObsahKosiku($idKosiku);
+        $this->template->prehled = $this->kosikManager->getPrehledKosiku($this->user, $idKosiku)->fetch();
     }
     
     public function renderObjednejKosik($idKosiku){

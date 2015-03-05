@@ -35,17 +35,19 @@ class KosikManager extends Nette\Object {
         $this->database = $database;
     }
 
-    public function getPrehledKosiku($user) {
+    public function getPrehledKosiku($user, $idkosiku) {
+        $where = ' AND kosiky.id_kosiku = '.$idkosiku;
         $sql = 'SELECT
             id_kosiku,
             datum_vytvoreni, 
             COUNT(id_zbozi) AS produkty, 
+            SUM(zbozi_kosik.mnozstvi) AS produkty_celkem,
             Sum(produkty.cena*zbozi_kosik.mnozstvi) AS suma 
                 FROM kosiky 
                     NATURAL JOIN uzivatele
                     NATURAL JOIN zbozi_kosik
                     INNER JOIN produkty ON zbozi_kosik.id_zbozi = produkty.id_produktu
-                WHERE kosiky.id_uzivatele = ? 
+                WHERE kosiky.id_uzivatele = ?'.($idkosiku ? $where : '').'  
                 GROUP BY kosiky.id_kosiku';
         $kosiky = $this->database->queryArgs($sql, array($user->id));
         return $kosiky;
@@ -85,11 +87,20 @@ class KosikManager extends Nette\Object {
 
     public function addProdukt($user, $idProduktu, $mnozstvi) {
         $kosik = $this->getOpenKosik($user);
-        $this->database->table(self::TABLE_NAME_ZBOZI_KOSIKU)->insert(array(
-            self::COLUMN_ID_KOSIKU => $kosik->id_kosiku,
-            self::COLUMN_ID_ZBOZI => $idProduktu,
-            self::COLUMN_MNOZSTVI => $mnozstvi,
-        ));
+        $produkt = $this->database->table(self::TABLE_NAME_ZBOZI_KOSIKU)
+                ->where(self::COLUMN_ID_ZBOZI . " = " . $idProduktu . " AND " . self::COLUMN_ID_KOSIKU . " = " . $kosik->id_kosiku)
+                ->fetch();
+        if ($produkt) {
+            $produkt->update(array(
+                self::COLUMN_MNOZSTVI => $produkt->mnozstvi + $mnozstvi
+            ));
+        } else {
+            $this->database->table(self::TABLE_NAME_ZBOZI_KOSIKU)->insert(array(
+                self::COLUMN_ID_KOSIKU => $kosik->id_kosiku,
+                self::COLUMN_ID_ZBOZI => $idProduktu,
+                self::COLUMN_MNOZSTVI => $mnozstvi,
+            ));
+        }
     }
 
     public function smazProdukt($idProduktu, $idkosiku) {
