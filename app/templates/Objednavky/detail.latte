@@ -6,30 +6,33 @@
     <header class="obsah">
         <h1>Detail Kosiku</h1>
     </header>
-    <table style="width:100%">
-        <tr>
-            <th>Produkt</th>
-            <th>Mnozstvi</th>
-            <th>Cena</th>
-            <th></th>
-        </tr>
-        <tr n:foreach="$produkty as $produkt">
-            <!--<td>{$produkt->datum_vytvoreni|date:'j. n. Y G:i'}</td>-->
-            <td style="width:25%">{$produkt->produkt}</td>
-            <td style="width:25%">{$produkt->mnozstvi}</td>
-            <td style="width:25%">{$produkt->cena}</td>
-            <td style="width:25%">
-                <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku">Smazat</a>
-            </td>
-        </tr>
-    </table>
-    <hr>
-    <table style="width:100%">
-        <tr>
-            <td style="font-weight: bold; width:25%">Celkem:</td>
-            <td style="width:25%">{$prehled->produkty_celkem}</td>
-            <td style="width:25%">{$prehled->suma}</td>
-            <td style="width:25%"><a n:href="Objednavky:objednejKosik $prehled->id_kosiku">Objednat</a></td>
-        </tr>
-    </table>
+
+    {if $prehled}
+        <table style="width:100%">
+            <tr>
+                <th>Produkt</th>
+                <th>Mnozstvi</th>
+                <th>Cena</th>
+                <th></th>
+            </tr>
+            <tr n:foreach="$produkty as $produkt">
+                <!--<td>{$produkt->datum_vytvoreni|date:'j. n. Y G:i'}</td>-->
+                <td style="width:25%">{$produkt->produkt}</td>
+                <td style="width:25%">{$produkt->mnozstvi}</td>
+                <td style="width:25%">{$produkt->cena}</td>
+                <td style="width:25%">
+                    <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku">Smazat</a>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <table style="width:100%">
+            <tr>
+                <td style="font-weight: bold; width:25%">Celkem:</td>
+                <td style="width:25%">{$prehled->produkty_celkem}</td>
+                <td style="width:25%">{$prehled->suma}</td>
+                <td style="width:25%"><a n:href="Objednavky:objednejKosik $prehled->id_kosiku">Objednat</a></td>
+            </tr>
+        </table>
+    {/if}
 </article>

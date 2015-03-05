@@ -39,6 +39,7 @@ class KosikManager extends Nette\Object {
         $where = ' AND kosiky.id_kosiku = '.$idkosiku;
         $sql = 'SELECT
             id_kosiku,
+            id_uzivatele,
             datum_vytvoreni, 
             COUNT(id_zbozi) AS produkty, 
             SUM(zbozi_kosik.mnozstvi) AS produkty_celkem,

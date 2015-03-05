@@ -4,7 +4,7 @@
 
 <article>
     <header class="obsah">
-        <h1>Prehled objednavek</h1>
+        <h1>Prehled kosiku</h1>
     </header>
     <table style="width:100%">
         <tr>
@@ -14,13 +14,15 @@
             <th></th>
         </tr>
         <tr n:foreach="$kosiky as $kosik">
-            <td>{$kosik->datum_vytvoreni|date:'j. n. Y G:i'}</td>
-            <td>{$kosik->produkty}</td>
-            <td>{$kosik->suma}</td>
-            <td>
-                <a n:href="Objednavky:detail $kosik->id_kosiku">Detail</a>
-                <a n:href="Objednavky:objednejKosik $kosik->id_kosiku">Objednat</a>
-            </td>
+            {if $kosik->id_uzivatele==$user->id}
+                <td>{$kosik->datum_vytvoreni|date:'j. n. Y G:i'}</td>
+                <td>{$kosik->produkty}</td>
+                <td>{$kosik->suma}</td>
+                <td>
+                    <a n:href="Objednavky:detail $kosik->id_kosiku">Detail</a>
+                    <a n:href="Objednavky:objednejKosik $kosik->id_kosiku">Objednat</a>
+                </td>
+            {/if}
         </tr>
     </table>
 </article>
