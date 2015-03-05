@@ -19,7 +19,9 @@
                 <a class="prvekMenu" n:href="Clanky:default">Clanky</a>
                 <!--<a class="prvekMenu" n:href="Aktuality:default">Aktuality</a>-->
                 <a class="prvekMenu" n:href="Produkty:default">Produkty</a>
-                <a class="prvekMenu" n:href="Objednavky:default">Kosiky</a>
+                {if $user->isLoggedIn()}
+                    <a class="prvekMenu" n:href="Objednavky:default">Kosiky</a>
+                {/if}
                 {if $user->isInRole('admin')}          
                     <a class="prvekMenu" n:href="Materialy:default">Materialy</a>
                 {/if}
