@@ -19,7 +19,7 @@
             <td>{$produkt->mnozstvi}</td>
             <td>{$produkt->cena}</td>
             <td>
-                <a n:href="Objednavky:smazatProdukt $produkt->id_kosiku $produkt->id_produktu">Smazat</a>
+                <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku">Smazat</a>
             </td>
         </tr>
     </table>

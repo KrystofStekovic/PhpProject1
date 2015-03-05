@@ -30,4 +30,13 @@ class ObjednavkyPresenter extends BasePresenter{
     public function renderDetail($idKosiku) {
         $this->template->produkty = $this->kosikManager->getObsahKosiku($idKosiku);
     }
+    
+    public function renderObjednejKosik($idKosiku){
+        
+    }
+
+    public function actionSmazatProdukt($produktId, $kosikId) {
+        $this->kosikManager->smazProdukt($produktId, $kosikId);
+        $this->redirect('detail?idKosiku='.$kosikId);
+    }
 }

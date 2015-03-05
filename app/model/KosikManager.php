@@ -92,4 +92,8 @@ class KosikManager extends Nette\Object {
         ));
     }
 
+    public function smazProdukt($idProduktu, $idkosiku) {
+        
+    }
+
 }
