@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2015 at 12:42 PM
+-- Generation Time: Mar 09, 2015 at 09:32 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `kosiky` (
   `id_uzivatele` int(11) DEFAULT NULL,
   `datum_vytvoreni` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `otevreny` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 --
 -- Dumping data for table `kosiky`
@@ -83,7 +83,12 @@ CREATE TABLE IF NOT EXISTS `kosiky` (
 
 INSERT INTO `kosiky` (`id_kosiku`, `id_uzivatele`, `datum_vytvoreni`, `otevreny`) VALUES
 (1, 4, '2015-02-25 21:59:18', 1),
-(2, 3, '2015-03-05 11:42:06', 1);
+(2, 3, '2015-03-05 11:42:06', 1),
+(3, NULL, '2015-03-09 17:37:05', 1),
+(4, NULL, '2015-03-09 17:40:49', 1),
+(5, NULL, '2015-03-09 17:47:07', 1),
+(6, 3, '2015-03-09 17:52:31', 1),
+(7, 4, '2015-03-09 18:37:52', 1);
 
 -- --------------------------------------------------------
 
@@ -96,6 +101,32 @@ CREATE TABLE IF NOT EXISTS `materialy` (
   `nazev` varchar(200) COLLATE utf8_czech_ci NOT NULL,
   `mnozstvi` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `objednavky`
+--
+
+CREATE TABLE IF NOT EXISTS `objednavky` (
+`id_objednavky` int(11) NOT NULL,
+  `id_uzivatele` int(11) DEFAULT NULL,
+  `id_kosiku` int(11) DEFAULT NULL,
+  `jmeno` varchar(100) COLLATE utf8_czech_ci NOT NULL,
+  `prijmeni` varchar(100) COLLATE utf8_czech_ci NOT NULL,
+  `stav` varchar(100) COLLATE utf8_czech_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+--
+-- Dumping data for table `objednavky`
+--
+
+INSERT INTO `objednavky` (`id_objednavky`, `id_uzivatele`, `id_kosiku`, `jmeno`, `prijmeni`, `stav`) VALUES
+(3, 3, 2, 'fasd', 'fdsadf', 'objednano'),
+(4, 4, 1, 'fdsfsdf', 'sfdaf', 'objednano'),
+(5, 4, 1, 'fdsfsdf', 'sfdaf', 'objednano'),
+(6, 4, 1, 'fdsfsdf', 'sfdaf', 'objednano'),
+(7, 4, 1, 'fdsfsdf', 'sfdaf', 'objednano');
 
 -- --------------------------------------------------------
 
@@ -180,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `zbozi_kosik` (
   `id_kosiku` int(11) NOT NULL,
   `id_zbozi` int(11) DEFAULT NULL,
   `mnozstvi` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 --
 -- Dumping data for table `zbozi_kosik`
@@ -190,7 +221,9 @@ INSERT INTO `zbozi_kosik` (`id_zbozi_kosik`, `id_kosiku`, `id_zbozi`, `mnozstvi`
 (1, 1, 1, 1),
 (2, 1, 2, 3),
 (10, 2, 3, 3),
-(11, 2, 2, 1);
+(11, 2, 2, 1),
+(12, 6, 1, 4),
+(13, 6, 2, 4);
 
 --
 -- Indexes for dumped tables
@@ -219,6 +252,12 @@ ALTER TABLE `kosiky`
 --
 ALTER TABLE `materialy`
  ADD PRIMARY KEY (`id_materialu`);
+
+--
+-- Indexes for table `objednavky`
+--
+ALTER TABLE `objednavky`
+ ADD PRIMARY KEY (`id_objednavky`), ADD KEY `id_uzivatele` (`id_uzivatele`), ADD KEY `id_kosiku` (`id_kosiku`), ADD KEY `id_uzivatele_2` (`id_uzivatele`), ADD KEY `id_kosiku_2` (`id_kosiku`);
 
 --
 -- Indexes for table `obrazky`
@@ -262,12 +301,17 @@ MODIFY `id_clanku` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `kosiky`
 --
 ALTER TABLE `kosiky`
-MODIFY `id_kosiku` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id_kosiku` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `materialy`
 --
 ALTER TABLE `materialy`
 MODIFY `id_materialu` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `objednavky`
+--
+ALTER TABLE `objednavky`
+MODIFY `id_objednavky` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `obrazky`
 --
@@ -287,7 +331,7 @@ MODIFY `id_uzivatele` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `zbozi_kosik`
 --
 ALTER TABLE `zbozi_kosik`
-MODIFY `id_zbozi_kosik` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id_zbozi_kosik` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --
@@ -297,6 +341,13 @@ MODIFY `id_zbozi_kosik` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 ALTER TABLE `kosiky`
 ADD CONSTRAINT `kosiky_ibfk_1` FOREIGN KEY (`id_uzivatele`) REFERENCES `uzivatele` (`id_uzivatele`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `objednavky`
+--
+ALTER TABLE `objednavky`
+ADD CONSTRAINT `objednavky_ibfk_1` FOREIGN KEY (`id_uzivatele`) REFERENCES `uzivatele` (`id_uzivatele`) ON DELETE SET NULL ON UPDATE CASCADE,
+ADD CONSTRAINT `objednavky_ibfk_2` FOREIGN KEY (`id_kosiku`) REFERENCES `kosiky` (`id_kosiku`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `produkty`
