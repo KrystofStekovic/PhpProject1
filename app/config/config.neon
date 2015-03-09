@@ -30,6 +30,7 @@ nette:
 services:
 	- App\Model\UserManager
 	- App\Model\KosikManager
+	- App\Model\ObjednavkyManager
 	router: App\RouterFactory::createRouter
 
 

@@ -36,20 +36,23 @@ class KosikManager extends Nette\Object {
     }
 
     public function getPrehledKosiku($user, $idkosiku) {
-        $where = ' AND kosiky.id_kosiku = '.$idkosiku;
+        $where = ' AND k.id_kosiku = ' . $idkosiku;
         $sql = 'SELECT
-            id_kosiku,
-            id_uzivatele,
-            datum_vytvoreni, 
-            COUNT(id_zbozi) AS produkty, 
-            SUM(zbozi_kosik.mnozstvi) AS produkty_celkem,
-            Sum(produkty.cena*zbozi_kosik.mnozstvi) AS suma 
-                FROM kosiky 
-                    NATURAL JOIN uzivatele
-                    NATURAL JOIN zbozi_kosik
-                    INNER JOIN produkty ON zbozi_kosik.id_zbozi = produkty.id_produktu
-                WHERE kosiky.id_uzivatele = ?'.($idkosiku ? $where : '').'  
-                GROUP BY kosiky.id_kosiku';
+            k.id_kosiku,
+            u.id_uzivatele,
+            k.datum_vytvoreni, 
+            COUNT(zk.id_zbozi) AS produkty, 
+            SUM(zk.mnozstvi) AS produkty_celkem,
+            Sum(p.cena*zk.mnozstvi) AS suma,
+            o.stav AS stav
+                FROM kosiky k 
+                    NATURAL JOIN uzivatele u
+                    NATURAL JOIN zbozi_kosik zk
+                    INNER JOIN produkty p ON zk.id_zbozi = p.id_produktu
+                    LEFT OUTER JOIN objednavky o ON k.id_kosiku = o.id_kosiku
+                WHERE k.id_uzivatele = ?' . ($idkosiku ? $where : '') . '  
+                GROUP BY k.id_kosiku
+                ORDER BY k.datum_vytvoreni DESC';
         $kosiky = $this->database->queryArgs($sql, array($user->id));
         return $kosiky;
     }
@@ -72,16 +75,22 @@ class KosikManager extends Nette\Object {
     }
 
     public function getOpenKosik($user) {
-        $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)
-                ->where(self::COLUMN_ID_UZIVATELE . ' = ? AND ' . self::COLUMN_OTEVRENY . ' = ?', $user->id, true)
-                ->fetch();
+        $sql = 'SELECT k.id_kosiku AS id_kosiku,
+                    k.id_uzivatele AS id_uzivatele,
+                    k.datum_vytvoreni AS datum
+           	FROM kosiky k 
+                    LEFT OUTER JOIN objednavky o ON k.id_kosiku = o.id_kosiku
+                WHERE o.id_objednavky is null AND k.id_uzivatele =  ? ';
+        $kosik = $this->database->queryArgs($sql, array($user->id))->fetch();
+//        $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)
+//                ->where(self::COLUMN_ID_UZIVATELE . ' = ? ', $user->id);
+//                ->fetch();
+//        $objednavka = $kosik->ref('objednavky', 'id_kosiku');
         if (!$kosik) {
             $this->database->table(self::TABLE_NAME_KOSIKY)->insert(array(
                 self::COLUMN_ID_UZIVATELE => $user->id,
             ));
-            $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)
-                    ->where(self::COLUMN_ID_UZIVATELE . ' = ? AND ' . self::COLUMN_OTEVRENY . ' = ?', $user->id, true)
-                    ->fetch();
+            $kosik = $this->database->queryArgs($sql, array($user->id))->fetch();
         }
         return $kosik;
     }

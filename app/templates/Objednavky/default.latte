@@ -8,9 +8,31 @@
     </header>
     <table style="width:100%">
         <tr>
+            <th>Produkt</th>
+            <th>Mnozstvi</th>
+            <th>Cena</th>
+            <th></th>
+        </tr>
+        <tr n:foreach="$produkty as $produkt">
+            <!--<td>{$produkt->datum_vytvoreni|date:'j. n. Y G:i'}</td>-->
+            <td style="width:25%">{$produkt->produkt}</td>
+            <td style="width:25%">{$produkt->mnozstvi}</td>
+            <td style="width:25%">{$produkt->cena}</td>
+            <td style="width:25%">
+                <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku">Smazat</a>
+            </td>
+        </tr>
+    </table>
+    <header class="obsah">
+        <h1>Historie</h1>
+    </header>
+
+    <table style="width:100%">
+        <tr>
             <th>Datum vytvoreni</th>
             <th>Pocet produktu v kosiku</th> 
             <th>Celkova cena kosiku</th>
+            <th>Stav</th>
             <th></th>
         </tr>
         <tr n:foreach="$kosiky as $kosik">
@@ -18,9 +40,12 @@
                 <td>{$kosik->datum_vytvoreni|date:'j. n. Y G:i'}</td>
                 <td>{$kosik->produkty}</td>
                 <td>{$kosik->suma}</td>
+                <td>{$kosik->stav}</td>
                 <td>
                     <a n:href="Objednavky:detail $kosik->id_kosiku">Detail</a>
-                    <a n:href="Objednavky:objednejKosik $kosik->id_kosiku">Objednat</a>
+                    {if !$kosik->stav}
+                        <a n:href="Objednavky:objednejKosik $kosik->id_kosiku">Objednat</a>
+                    {/if}
                 </td>
             {/if}
         </tr>

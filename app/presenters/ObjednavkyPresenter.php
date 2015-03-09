@@ -8,7 +8,8 @@
 
 namespace App\Presenters;
 
-use Nette;
+use Nette,
+    Nette\Application\UI\Form;
 
 /**
  * Description of ObjednavkyPresenter
@@ -23,8 +24,16 @@ class ObjednavkyPresenter extends BasePresenter{
      */
     public $kosikManager;
     
+    /**
+     * @var \App\Model\ObjednavkyManager
+     * @inject
+     */
+    public $objednavkyManager;
+    
     public function renderDefault() {
         $this->template->kosiky = $this->kosikManager->getPrehledKosiku($this->user, null);
+        $kosik = $this->kosikManager->getOpenKosik($this->user);
+        $this->template->produkty = $this->kosikManager->getObsahKosiku($kosik->id_kosiku);
     }
     
     public function renderDetail($idKosiku) {
@@ -33,11 +42,27 @@ class ObjednavkyPresenter extends BasePresenter{
     }
     
     public function renderObjednejKosik($idKosiku){
-        
+        $this['objednavkaForm']->setDefaults(array('idKosiku' => $idKosiku));
     }
 
     public function actionSmazatProdukt($produktId, $kosikId) {
         $this->kosikManager->smazProdukt($produktId, $kosikId);
         $this->redirect('detail?idKosiku='.$kosikId);
+    }
+
+    public function createComponentObjednavkaForm() {
+        $form = new Form;
+        $form->addText('jmeno', 'Jmeno:')
+                ->setRequired();
+        $form->addText('prijmeni', 'Prijmeni:')
+                ->setRequired();        
+        $form->addSubmit('send', 'Objednej');
+        $form->onSuccess[] = array($this, 'vytvorObjednavku');
+        return $form;
+    }
+    
+    public function vytvorObjednavku($form, $values){
+        $idKosiku = $this->getParameter('idKosiku');
+        $this->objednavkyManager->objednejKosik($this->user->id, $idKosiku, $values->jmeno, $values->prijmeni);
     }
 }

@@ -20,9 +20,11 @@
                 <td style="width:25%">{$produkt->produkt}</td>
                 <td style="width:25%">{$produkt->mnozstvi}</td>
                 <td style="width:25%">{$produkt->cena}</td>
-                <td style="width:25%">
-                    <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku">Smazat</a>
-                </td>
+                {if !$prehled->stav}
+                    <td style="width:25%">
+                        <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku">Smazat</a>
+                    </td>
+                {/if}
             </tr>
         </table>
         <hr>
@@ -31,7 +33,11 @@
                 <td style="font-weight: bold; width:25%">Celkem:</td>
                 <td style="width:25%">{$prehled->produkty_celkem}</td>
                 <td style="width:25%">{$prehled->suma}</td>
-                <td style="width:25%"><a n:href="Objednavky:objednejKosik $prehled->id_kosiku">Objednat</a></td>
+                <td style="width:25%">
+                {if !$prehled->stav}
+                    <a n:href="Objednavky:objednejKosik $prehled->id_kosiku">Objednat</a>
+                {/if}
+                </td>
             </tr>
         </table>
     {/if}
