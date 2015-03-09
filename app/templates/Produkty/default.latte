@@ -6,13 +6,19 @@
 {if $user->isInRole('admin')}
     <a n:href="Produkty:novy">Novy produkt</a>
 {/if}
-<div n:foreach="$produkty as $produkt">
-    <img src="{$obrazky[$produkt->id_produktu]|dataStream}" >
-    {$produkt->nazev}
-    {$produkt->popis}
-    {$produkt->cena} Kč
-    {$produkt->id_materialu}
-    {$produkt->mnozstvi}
+<article class="produkt" n:foreach="$produkty as $produkt">
+    <header class="nazevProduktu">
+        <b>{$produkt->nazev}</b>
+    </header>
+    
+    <img class="produkty" src="{$obrazky[$produkt->id_produktu]|dataStream}" >
+    
+    <div class="popisProdukut"> 
+    <p><b>Popis: </b>{$produkt->popis}</p>
+    <p><b>Cena: </b>{$produkt->cena|number:0:',':' '} Kč</p>
+    <p><b>Material: </b>{$produkt->id_materialu}</p>
+    <p><b>Množství: </b>{$produkt->mnozstvi}</p>
+    </div>
     {if $user->isLoggedIn()}
         {form mnozstviForm}
         {label $form['mnozstvi']}{input $form['mnozstvi']}{/label}
@@ -24,4 +30,4 @@
     <a n:href="Produkty:edit $produkt->id_produktu">Editovat</a>
     <a n:href="Produkty:delete $produkt->id_produktu">Smazat</a>
 {/if}
-</div>
+</article>
