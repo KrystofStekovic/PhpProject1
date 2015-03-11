@@ -22,6 +22,10 @@ class ObjednavkyManager {
             COLUMN_ID_OBJEDNAVKY = 'id_objednavky',
             COLUMN_ID_UZIVATELE = 'id_uzivatele',
             COLUMN_ID_KOSIKU = 'id_kosiku',
+            COLUMN_DATUM_VYTVORENI = 'datum_vytvoreni',
+            COLUMN_DATUM_POTVRZENI = 'datum_potvrzeni',
+            COLUMN_DATUM_ODESLANI = 'datum_odeslani',
+            COLUMN_DATUM_DORUCENI = 'datum_doruceni',
             COLUMN_JMENO = 'jmeno',
             COLUMN_PRIJMENI = 'prijmeni',
             COLUMN_STAV = 'stav';
@@ -46,7 +50,16 @@ class ObjednavkyManager {
     public function potvrditObjednavku($idObjednavky) {
         $objednavka = $this->database->table(self::TABLE_NAME_OBJEDNAVKY)->where('id_objednavky = ?', $idObjednavky);
         $objednavka->update(array(
-            self::COLUMN_STAV => 'potvrzeno'
+            self::COLUMN_STAV => 'potvrzeno',
+            self::COLUMN_DATUM_POTVRZENI => date("Y-m-d H:i:s")
+        ));
+    }
+    
+    public function odeslanaObjednavka($idObjednavky) {
+        $objednavka = $this->database->table(self::TABLE_NAME_OBJEDNAVKY)->where('id_objednavky = ?', $idObjednavky);
+        $objednavka->update(array(
+            self::COLUMN_STAV => 'odeslano',
+            self::COLUMN_DATUM_ODESLANI => date("Y-m-d H:i:s")
         ));
     }
     

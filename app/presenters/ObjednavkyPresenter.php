@@ -62,6 +62,13 @@ class ObjednavkyPresenter extends BasePresenter {
             $this->redirect('admin');
         }
     }
+    
+    public function actionOdeslano($objednavkaID) {
+        if ($this->user->isInRole("admin")) {
+            $this->objednavkyManager->odeslanaObjednavka($objednavkaID);
+            $this->redirect('admin');
+        }
+    }
 
     public function createComponentObjednavkaForm() {
         $form = new Form;

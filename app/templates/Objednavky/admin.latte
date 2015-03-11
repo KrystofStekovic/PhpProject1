@@ -22,7 +22,7 @@
                 {if $objednavka->stav == 'objednano'}
                     <a n:href="Objednavky:potvrdit $objednavka->id_objednavky">Potvrdit</a>
                 {elseif $objednavka->stav == 'potvrzeno'}
-                    <a n:href="Objednavky:detail $objednavka->id_objednavky">Odeslano</a>
+                    <a n:href="Objednavky:odeslano $objednavka->id_objednavky">Odeslano</a>
                 {/if}
             </td>
         </tr>

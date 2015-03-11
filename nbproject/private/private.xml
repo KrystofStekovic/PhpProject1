@@ -9,6 +9,7 @@
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Objednavky/objednejKosik.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/bootstrap.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/config/config.neon</file>
+            <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Objednavky/admin.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/presenters/ProduktyPresenter.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/presenters/HomepagePresenter.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/www/css/screen.css</file>
@@ -17,6 +18,7 @@
             <file>file:/C:/xampp/htdocs/PhpProject1/www/css/print.css</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/presenters/MaterialyPresenter.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/presenters/SignPresenter.php</file>
+            <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Produkty/edit.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/presenters/BasePresenter.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Materialy/edit.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/presenters/ClanekyPresenter.php</file>
