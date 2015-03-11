@@ -43,4 +43,31 @@ class ObjednavkyManager {
         ));
     }
 
+    public function potvrditObjednavku($idObjednavky) {
+        $objednavka = $this->database->table(self::TABLE_NAME_OBJEDNAVKY)->where('id_objednavky = ?', $idObjednavky);
+        $objednavka->update(array(
+            self::COLUMN_STAV => 'potvrzeno'
+        ));
+    }
+    
+    public function getObjednavky(){
+        return $this->database->table(self::TABLE_NAME_OBJEDNAVKY);
+    }
+
+//    public function getObjednano() {
+//        return $this->database->table(self::TABLE_NAME_OBJEDNAVKY)->where('stav = ?', 'objednano');
+//    }
+
+//    public function getZpracovani() {
+//        
+//    }
+
+//    public function getOdeslano() {
+//        
+//    }
+
+//    public function getPrijato() {
+//        
+//    }
+
 }
