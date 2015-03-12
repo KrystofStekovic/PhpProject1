@@ -1,9 +1,0 @@
-<?php //netteCache[01]000252a:3:{s:4:"time";s:21:"0.05731800 1425319308";s:9:"callbacks";a:1:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:60:"C:\xampp\htdocs\PhpProject1\app\presenters\SignPresenter.php";i:2;i:1425319096;}}s:10:"serialized";b:1;}?>a:1:{s:28:"App\Presenters\SignPresenter";a:4:{s:5:"class";s:36:"/**
- * Sign in/out presenters.
- */";s:3:"use";a:2:{s:5:"Nette";s:5:"Nette";s:4:"Form";s:25:"Nette\Application\UI\Form";}s:12:"$userManager";s:64:"/**
-     * @var \App\Model\UserManager
-     * @inject
-     */";s:7:"$mailer";s:64:"/**
-     * @var Nette\Mail\SmtpMailer 
-     * @inject
-     */";}}
