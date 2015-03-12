@@ -1,0 +1,31 @@
+{* Latte template *}
+
+{block content}
+<article>
+    <header class="obsah">
+        <h1>Administrace objednavek</h1>
+    </header>
+
+    <table style="width:100%">
+        <tr>
+            <th>Datum vytvoreni</th>
+            <th>Jmeno a prijmeni</th>
+            <th>Stav</th>
+            <th></th>
+        </tr>
+        <tr n:foreach="$objednavky as $objednavka">
+            <td>{$objednavka->datum_vytvoreni|date:'j. n. Y G:i'}</td>
+            <td>{$objednavka->jmeno} {$objednavka->prijmeni}</td>
+            <td>{$objednavka->stav}</td>
+            <td>
+                <a n:href="Objednavky:detail $objednavka->id_kosiku">Detail</a>
+                {if $objednavka->stav == 'objednano'}
+                    <a n:href="Objednavky:potvrdit $objednavka->id_objednavky">Potvrdit</a>
+                {elseif $objednavka->stav == 'potvrzeno'}
+                    <a n:href="Objednavky:odeslano $objednavka->id_objednavky">Odeslano</a>
+                {/if}
+            </td>
+        </tr>
+    </table>
+
+</article>

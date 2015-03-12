@@ -36,7 +36,7 @@ class KosikManager extends Nette\Object {
     }
 
     public function getPrehledKosiku($user, $idkosiku) {
-        $where = ' AND k.id_kosiku = ' . $idkosiku;
+        $where = 'WHERE k.id_kosiku = ' . $idkosiku;
         $sql = 'SELECT
             k.id_kosiku,
             u.id_uzivatele,
@@ -50,10 +50,10 @@ class KosikManager extends Nette\Object {
                     NATURAL JOIN zbozi_kosik zk
                     INNER JOIN produkty p ON zk.id_zbozi = p.id_produktu
                     LEFT OUTER JOIN objednavky o ON k.id_kosiku = o.id_kosiku
-                WHERE k.id_uzivatele = ?' . ($idkosiku ? $where : '') . '  
+                ' . ($idkosiku ? $where : '') . '  
                 GROUP BY k.id_kosiku
                 ORDER BY k.datum_vytvoreni DESC';
-        $kosiky = $this->database->queryArgs($sql, array($user->id));
+        $kosiky = $this->database->query($sql);
         return $kosiky;
     }
 
