@@ -1,6 +1,11 @@
 {* Latte template *}
 
 {block content}
+<header>
+    <nav>
+            <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
+    </nav>  
+</header>
 
 <article n:foreach="$clanky as $clanek" class="post">
     <header class="obsah">
@@ -11,7 +16,7 @@
         <nav>
             <a n:href="Clanky:edit $clanek->id_clanku">Editovat</a>
             <a n:href="Clanky:delete $clanek->id_clanku">Smazat</a>
-    <a n:href="Clanky:novy">Novy clanek</a>
+            <a n:href="Clanky:novy">Novy clanek</a>
         </nav>
     {/if}
     <p>{$clanek->datum|date:'j. n. Y'}</p>

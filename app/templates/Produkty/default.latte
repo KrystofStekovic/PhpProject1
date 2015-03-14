@@ -1,6 +1,11 @@
 {* Latte template *}
 
 {block content}
+<header>
+    <nav>
+            <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
+    </nav>  
+</header>
 
 
 {if $user->isInRole('admin')}
@@ -10,14 +15,14 @@
     <header class="nazevProduktu">
         <b>{$produkt->nazev}</b>
     </header>
-    
+
     <img class="produkty" src="{$obrazky[$produkt->id_produktu]|dataStream}" >
-    
+
     <div class="popisProdukut"> 
-    <p><b>Popis: </b>{$produkt->popis}</p>
-    <p><b>Cena: </b>{$produkt->cena|number:0:',':' '} Kč</p>
-    <p><b>Material: </b>{$produkt->id_materialu}</p>
-    <p><b>Množství: </b>{$produkt->mnozstvi}</p>
+        <p><b>Popis: </b>{$produkt->popis}</p>
+        <p><b>Cena: </b>{$produkt->cena|number:0:',':' '} Kč</p>
+        <p><b>Material: </b>{$produkt->id_materialu}</p>
+        <p><b>Množství: </b>{$produkt->mnozstvi}</p>
     </div>
     {if $user->isLoggedIn()}
         {form mnozstviForm}

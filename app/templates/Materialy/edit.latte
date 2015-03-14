@@ -2,6 +2,11 @@
 
 {block content}
 {if $user->isInRole('admin')}
+    <header>
+        <nav>
+                <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
+        </nav>  
+    </header>
     <h3>Upravit Material</h3>
     {control materialForm}
 {/if}
