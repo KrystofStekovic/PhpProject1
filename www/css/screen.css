@@ -13,57 +13,29 @@ body {
     background-position: top center;
 }
 
-a , a:visited {
-    top: 7px;
-    text-decoration: none;
-    text-align: center;
-    padding-top: 3px;
-}
-
-/* mouse over link */
-a:hover {
-    color: #FF00FF;
-}
-/* selected link */
-a:active {
-    color: aqua;
-}
-
 header{
     color: black;
     font-weight: bold;
     /*background-image: url(../images/head.png);*/
+    background-color: bisque;
     background-repeat: no-repeat;
     background-position: center center;
     height: 130px;
 }
 
-header.obsah{
-    position: relative;
-    top: 30px;
-    text-align: center;
-    background: none;
-    height: 60px;
-}
-
-header.nazevProduktu{
-    height: 30px;
-    text-align: center;
-    background: none;
-}
-
-nav{
+header nav{
     position: relative;
     top: 15px;
     text-align: center;
     /*background-color: yellow;*/
     /*background-image: url(../images/vlna.png);*/
+    background-color: royalblue;
     background-repeat: no-repeat;
     background-position: center center;
     height: 30px;
 }
 
-nav a {
+header nav a {
     display: inline-block;
     width: 150px;
     height: 30px;
@@ -73,13 +45,61 @@ nav a {
     background-position: center top;    
 }
 
-article{
-    position: relative;
-    left: 5%;
-    text-align: left;
+header.nazevProduktu{
+    height: 30px;
+    text-align: center;
     background: none;
+}
+
+section {
+    background-image: url(../images/text_pole.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
+    width: 930px;
+    height: auto;
+}
+
+section header{
+    background-color: red;
+    width: 90%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+section header nav{
+    display: inline;
+    text-align: left;
+    background-color: yellow;
+    width: 100%;
+    height: 30px;
+    top: 0px;
+    
+}
+section header nav a {
+    background-color: pink;
+}
+
+article{
+    background-color: yellowgreen;
+    text-align: left;
+    /*background: none;*/
     width: 90%;
     height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+}
+
+article header{
+    text-align: center;
+    background-color: brown;
+    height: 30px;
+    width: 100%
 }
 
 article nav{
@@ -94,20 +114,13 @@ article nav a{
     width: auto;
 }
 article.produkt{
-     width: 40%;
+     width: 35%;
      display: inline-table;
      margin-top: 20px;
     
 }
 #frm-signInForm-email { width: 150px}
 #frm-signInForm-heslo{ width:  150px}
-
-#container{
-    /*background-image: url(../images/fotka_pozadi.jpg);*/
-    background-repeat: no-repeat;
-    background-position: center top;
-    height: 661px;
-}
 
 .login{
     position: relative;
@@ -134,19 +147,25 @@ table {
     text-align: center;
 }
 
-section {
-    background-image: url(../images/text_pole.png);
-    background-repeat: no-repeat;
-    background-position: center top;
-    margin-left: auto;
-    margin-right: auto;
-    width: 930px;
-    height: auto;
-}
-
 footer {
     color: white;
     font-weight: bold;
+}
+
+a , a:visited {
+    top: 7px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 3px;
+}
+
+/* mouse over link */
+a:hover {
+    color: #FF00FF;
+}
+/* selected link */
+a:active {
+    color: aqua;
 }
 
 img.produkty {

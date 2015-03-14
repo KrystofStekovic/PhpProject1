@@ -3,14 +3,13 @@
 {block content}
 <header>
     <nav>
-            <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
+        {if $user->isInRole('admin')}
+            <a n:href="Produkty:novy">Novy produkt</a>
+        {/if}
     </nav>  
 </header>
 
 
-{if $user->isInRole('admin')}
-    <a n:href="Produkty:novy">Novy produkt</a>
-{/if}
 <article class="produkt" n:foreach="$produkty as $produkt">
     <header class="nazevProduktu">
         <b>{$produkt->nazev}</b>

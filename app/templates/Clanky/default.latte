@@ -3,11 +3,11 @@
 {block content}
 <header>
     <nav>
-            <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
+            <a n:href="Aktuality:nova">Nova aktualita</a>
     </nav>  
 </header>
 
-<article n:foreach="$clanky as $clanek" class="post">
+<article n:foreach="$clanky as $clanek">
     <header class="obsah">
         <a n:href="Clanky:detail $clanek->id_clanku">{$clanek->nadpis}
     </header>
