@@ -46,13 +46,4 @@ Temporary Items
 
 temp/
 cache/
-temp/cache/latte/PhpProject1-app-templates-Aktuality-edit-latte-6046bb20bd433bceb2f8d4d027f463a1.php
-temp/cache/latte/PhpProject1-app-templates-Aktuality-nova-latte-9eaa5e17e145266828d0b07808484bc6.php
-temp/cache/_Nette.RobotLoader/_aa9b085e93b98c315ec20cb3c2f1e8fd
-temp/cache/latte/htdocs-PhpProject1-app-templates-Clanky-edit-latte-1fe07d215e35fa0fe2b37a6152faca77.php
-temp/cache/latte/htdocs-PhpProject1-app-templates-Clanky-novy-latte-f87429ec2a1b0562565487e27a47dcd1.php
-temp/cache/latte/htdocs-PhpProject1-app-templates-Clanky-edit-latte-1fe07d215e35fa0fe2b37a6152faca77.php
-temp/cache/latte/PhpProject1-app-templates-Aktuality-edit-latte-6046bb20bd433bceb2f8d4d027f463a1.php
-temp/cache/_Nette.RobotLoader/_aa9b085e93b98c315ec20cb3c2f1e8fd
-temp/cache/latte/PhpProject1-app-templates-Objednavky-default-latte-7172f604d37bb84bb6b424a1e9912cbb.php
-temp/btfj.dat
+log/error.log
