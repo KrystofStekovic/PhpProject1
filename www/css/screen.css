@@ -27,7 +27,6 @@ header nav{
     position: relative;
     top: 15px;
     text-align: center;
-    /*background-color: yellow;*/
     /*background-image: url(../images/vlna.png);*/
     background-color: royalblue;
     background-repeat: no-repeat;
@@ -43,12 +42,6 @@ header nav a {
     background-image: url(../images/tl_bila.png);
     background-repeat: no-repeat;
     background-position: center top;    
-}
-
-header.nazevProduktu{
-    height: 30px;
-    text-align: center;
-    background: none;
 }
 
 section {
@@ -72,19 +65,18 @@ section header{
 }
 
 section header nav{
-    display: inline;
-    text-align: left;
+    top : 10px;
     background-color: yellow;
-    width: 100%;
-    height: 30px;
-    top: 0px;
+    text-align: left;
+    height: auto;
     
 }
 section header nav a {
+    display: inline-block;
     background-color: pink;
 }
 
-article{
+section article{
     background-color: yellowgreen;
     text-align: left;
     /*background: none;*/
@@ -95,32 +87,47 @@ article{
     margin-top: 0px;
 }
 
-article header{
+section article header{
     text-align: center;
     background-color: brown;
     height: 30px;
     width: 100%
 }
 
-article nav{
-    text-align: left;
+
+section article header.nazevProduktu{
+    height: 30px;
+    text-align: center;
     background: none;
-    height: auto;
 }
 
-article nav a{
-    text-align: left;
-    height: auto;
-    width: auto;
-}
-article.produkt{
+section article.produkt{
      width: 35%;
      display: inline-table;
      margin-top: 20px;
     
 }
-#frm-signInForm-email { width: 150px}
-#frm-signInForm-heslo{ width:  150px}
+
+section article img.produkty {
+    float: left;
+    margin-left: 15px;
+    margin-right: 20px;
+    margin-top: 8px;
+
+   
+}
+section article div.popisProdukut{
+   // background-color: blue;
+   // margin-left: 15%;
+     margin-left: 145px;
+     margin-top: -15px;
+}
+
+footer {
+    color: white;
+    font-weight: bold;
+}
+
 
 .login{
     position: relative;
@@ -147,11 +154,6 @@ table {
     text-align: center;
 }
 
-footer {
-    color: white;
-    font-weight: bold;
-}
-
 a , a:visited {
     top: 7px;
     text-decoration: none;
@@ -168,18 +170,6 @@ a:active {
     color: aqua;
 }
 
-img.produkty {
-    float: left;
-    margin-left: 15px;
-    margin-right: 20px;
-    margin-top: 8px;
-
-   
-}
-div.popisProdukut{
-   // background-color: blue;
-   // margin-left: 15%;
-     margin-left: 145px;
-     margin-top: -15px;
-}
+#frm-signInForm-email { width: 150px}
+#frm-signInForm-heslo{ width:  150px}
 

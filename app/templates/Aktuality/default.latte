@@ -8,7 +8,7 @@
 </header>
 
 <article n:foreach="$aktuality as $aktualita">
-    <header class="obsah">
+    <header>
         <h1>{$aktualita->nadpis}</h1>
     </header>
     {if $user->isInRole('admin')}
