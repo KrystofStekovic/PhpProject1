@@ -8,7 +8,7 @@ body {
     width: 1270px;
     margin-left: auto;
     margin-right: auto;
-    background-image: url(../images/fotka_pozadi.jpg);
+    background-image: url(../images/head.png);
     background-repeat: no-repeat;
     background-position: top center;
 }
@@ -17,29 +17,31 @@ header{
     color: black;
     font-weight: bold;
     /*background-image: url(../images/head.png);*/
-    background-color: bisque;
+    /*background-color: bisque;*/
     background-repeat: no-repeat;
     background-position: center center;
-    height: 130px;
+    height: 375px;
 }
 
 header nav{
     position: relative;
-    top: 15px;
-    text-align: center;
+    top: 200px;
+    text-align: right;
     /*background-image: url(../images/vlna.png);*/
-    background-color: royalblue;
+    /*background-color: royalblue;*/
     background-repeat: no-repeat;
     background-position: center center;
     height: 30px;
 }
 
 header nav a {
+    padding-top: 4px;
     display: inline-block;
-    width: 150px;
+    width: 140px;
     height: 30px;
+    font-size: 20px;
     /*background-color: fuchsia;*/
-    background-image: url(../images/tl_bila.png);
+    /*background-image: url(../images/tl_bila.png);*/
     background-repeat: no-repeat;
     background-position: center top;    
 }
@@ -61,7 +63,7 @@ section header{
     height: 50px;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
 section header nav{
@@ -69,9 +71,11 @@ section header nav{
     background-color: yellow;
     text-align: left;
     height: auto;
-    
+
 }
 section header nav a {
+    
+    font-size: 13px;
     display: inline-block;
     background-color: pink;
 }
@@ -94,6 +98,20 @@ section article header{
     width: 100%
 }
 
+section article header a{
+    background-color: blue;
+    width: auto;
+    height: auto;
+    margin: 0px;
+}
+
+section article header h1{
+    background-color: blue;
+    width: auto;
+    height: auto;
+    margin: 0px;
+}
+
 
 section article header.nazevProduktu{
     height: 30px;
@@ -102,10 +120,10 @@ section article header.nazevProduktu{
 }
 
 section article.produkt{
-     width: 35%;
-     display: inline-table;
-     margin-top: 20px;
-    
+    width: 35%;
+    display: inline-table;
+    margin-top: 20px;
+
 }
 
 section article img.produkty {
@@ -114,13 +132,13 @@ section article img.produkty {
     margin-right: 20px;
     margin-top: 8px;
 
-   
+
 }
 section article div.popisProdukut{
-   // background-color: blue;
-   // margin-left: 15%;
-     margin-left: 145px;
-     margin-top: -15px;
+    // background-color: blue;
+    // margin-left: 15%;
+    margin-left: 145px;
+    margin-top: -15px;
 }
 
 footer {
@@ -142,7 +160,6 @@ div.flash {
     background: #FFF9D7;
     border: 1px solid #E2C822;
     padding: 1em;
-    /*margin: 1em 0;*/
     position: relative;
     top: 15px;
     width: 85%;
@@ -155,10 +172,8 @@ table {
 }
 
 a , a:visited {
-    top: 7px;
     text-decoration: none;
     text-align: center;
-    padding-top: 3px;
 }
 
 /* mouse over link */

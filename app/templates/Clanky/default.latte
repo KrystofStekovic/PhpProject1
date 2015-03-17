@@ -9,7 +9,9 @@
 
 <article n:foreach="$clanky as $clanek">
     <header>
-        <a n:href="Clanky:detail $clanek->id_clanku">{$clanek->nadpis}</a>
+        <!--<a n:href="Clanky:detail $clanek->id_clanku">{$clanek->nadpis}</a>-->
+        
+        <!--<h1>neco</h1>-->
     </header>
 
     {if $user->isInRole('admin')}
