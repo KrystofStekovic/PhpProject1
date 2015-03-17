@@ -31,6 +31,7 @@ services:
 	- App\Model\UserManager
 	- App\Model\KosikManager
 	- App\Model\ObjednavkyManager
+	- App\Model\ProduktyManager
 	router: App\RouterFactory::createRouter
 
 

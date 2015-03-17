@@ -45,6 +45,8 @@ class ObjednavkyManager {
             self::COLUMN_PRIJMENI => $prijmeni,
             self::COLUMN_STAV => 'objednano'
         ));
+        $kosik = $this->database->table('kosiky')->get($idkosiku);
+        $kosik->update(array('otevreny' => 0));
     }
 
     public function potvrditObjednavku($idObjednavky) {

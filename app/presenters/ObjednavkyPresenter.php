@@ -14,7 +14,7 @@ use Nette,
 /**
  * Description of ObjednavkyPresenter
  *
- * @author sasa
+ * @author Krystof
  */
 class ObjednavkyPresenter extends BasePresenter {
 

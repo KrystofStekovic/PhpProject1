@@ -3,7 +3,9 @@
 {block content}
 <header>
     <nav>
+        {if $user->isInRole('admin')}
         <a n:href="Clanky:novy">Novy clanek</a>
+        {/if}
     </nav>  
 </header>
 

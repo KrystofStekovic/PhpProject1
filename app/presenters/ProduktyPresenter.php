@@ -10,7 +10,6 @@ namespace App\Presenters;
 
 use Nette,
     Tracy\Debugger,
-    Nette\Utils\Image,
     Nette\Application\UI\Form;
 
 /**
@@ -25,22 +24,20 @@ class ProduktyPresenter extends BasePresenter {
      * @inject
      */
     public $kosikManager;
-    private $produkty;
+
+    /**
+     * @var \App\Model\ProduktyManager
+     * @inject
+     */
+    public $produktyManager;
 
     public function __construct(Nette\Database\Context $database) {
         $this->database = $database;
     }
 
     public function renderDefault() {
-        $this->produkty = $this->database->table('produkty');
-        $obrazky;
-        foreach ($this->produkty as $produkt) {
-            $obr = Image::fromFile($produkt->ref('obrazky', 'id_obrazku')->adresa);
-            $obr->resize(100, 100);
-            $obrazky[$produkt->id_produktu] = $obr;
-        }
-        $this->template->produkty = $this->produkty;
-        $this->template->obrazky = $obrazky;
+        $this->template->produkty = $this->produktyManager->getProdukty();
+        $this->template->obrazky = $this->produktyManager->getObrazkyProduktu();
     }
 
     public function createComponentProduktForm() {
@@ -82,38 +79,18 @@ class ProduktyPresenter extends BasePresenter {
     public function insertProdukt($form, $values) {
 
         $produktId = $this->getParameter('produktId');
-        $adresa = 'images/';
-
         if ($produktId) {
-            if ($values->obrazek) {
-                $file = $values->obrazek;
-                $obrazek['nazev'] = $file->name;
-                $obrazek['adresa'] = $adresa . $file->name;
-                $file->move($adresa.$file->name);
-                $idObr = $this->database->table('produkty')->where('id_produktu', $produktId)->fetch()->ref('obrazky', 'id_obrazku')->id_obrazku;
-                $obr = $this->database->table('obrazky')->get($idObr);
-                $obr->update($obrazek);
-            }
-            unset($values['obrazek']);
-            $produkt = $this->database->table('produkty')->get($produktId);
-            $produkt->update($values);
+            $this->produktyManager->updateProdukt($values, $produktId);
             $this->flashMessage('Produkt byl úspěšně upraven.', 'success');
         } else {
-            $file = $values->obrazek;
-            $obrazek['nazev'] = $file->name;
-            $obrazek['adresa'] = $adresa . $file->name;
-            $file->move($adresa.$file->name);
-            $obrazek = $this->database->table('obrazky')->insert($obrazek);
-            $values['id_obrazku'] = $obrazek->id_obrazku;
-            unset($values['obrazek']);
-            $produkt = $this->database->table('produkty')->insert($values);
+            $this->produktyManager->insertProdukt($values);
             $this->flashMessage('Produkt byl úspěšně vlozen.', 'success');
         }
         $this->redirect('this');
     }
 
     public function actionEdit($produktId) {
-        $produkt = $this->database->table('produkty')->get($produktId);
+        $produkt = $this->produktyManager->getProdukt($produktId);
         if (!$produkt) {
             $this->error('Produkt nebyl nalezen');
         }
@@ -121,7 +98,7 @@ class ProduktyPresenter extends BasePresenter {
     }
 
     public function actionDelete($produktId) {
-        $produkt = $this->database->table('produkty')->where('id_produktu', $produktId)->delete();
+        $this->produktyManager->getProdukty($produktId);
         $this->flashMessage('Produk byl úspěšně smazan.', 'success');
         $this->redirect('default');
     }

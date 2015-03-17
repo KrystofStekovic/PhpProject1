@@ -3,7 +3,7 @@
 {block content}
 <header>
     <nav>
-            <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
+        <a n:href="Objednavky:admin">Sprava Objednavek</a>
     </nav>  
 </header>
 
@@ -47,7 +47,13 @@
                 <td>{$kosik->datum_vytvoreni|date:'j. n. Y G:i'}</td>
                 <td>{$kosik->produkty}</td>
                 <td>{$kosik->suma}</td>
-                <td>{$kosik->stav}</td>
+                <td>
+                    {if !$kosik->stav}
+                        novy
+                    {else}
+                        {$kosik->stav}
+                    {/if}
+                </td>
                 <td>
                     <a n:href="Objednavky:detail $kosik->id_kosiku">Detail</a>
                     {if !$kosik->stav}
