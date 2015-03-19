@@ -20,18 +20,20 @@ header{
     /*background-color: bisque;*/
     background-repeat: no-repeat;
     background-position: center center;
-    height: 375px;
+    height: 250px;
 }
 
 header nav{
     position: relative;
-    top: 200px;
+    top: 100px;
     text-align: right;
     /*background-image: url(../images/vlna.png);*/
     /*background-color: royalblue;*/
     background-repeat: no-repeat;
     background-position: center center;
+    width: 800px;
     height: 30px;
+    float: right;
 }
 
 header nav a {
@@ -44,7 +46,8 @@ header nav a {
     /*background-color: fuchsia;*/
     /*background-image: url(../images/tl_bila.png);*/
     background-repeat: no-repeat;
-    background-position: center top;    
+    background-position: center top; 
+    margin: 2px;
 }
 
 section {
@@ -54,6 +57,7 @@ section {
 /*    background-image: url(../images/text_pole.png);
     background-repeat: no-repeat;
     background-position: center top;*/
+    min-height: 260px;
     margin-left: auto;
     margin-right: auto;
     padding-top: 30px;

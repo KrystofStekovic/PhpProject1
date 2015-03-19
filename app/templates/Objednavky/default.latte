@@ -26,7 +26,7 @@
             <td style="width:25%">{$produkt->mnozstvi}</td>
             <td style="width:25%">{$produkt->cena}</td>
             <td style="width:25%">
-                <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku, 'defaut'">Smazat</a>
+                <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku, 'default'">Smazat</a>
             </td>
         </tr>
     </table>
@@ -49,16 +49,10 @@
                 <td>{$kosik->datum_vytvoreni|date:'j. n. Y G:i'}</td>
                 <td>{$kosik->produkty}</td>
                 <td>{$kosik->suma}</td>
-                <td>
-                    {if !$kosik->stav}
-                        novy
-                    {else}
-                        {$kosik->stav}
-                    {/if}
-                </td>
+                <td>{$kosik->stav}</td>
                 <td>
                     <a n:href="Objednavky:detail $kosik->id_kosiku">Detail</a>
-                    {if !$kosik->stav}
+                    {if $kosik->stav == 'nový'}
                         <a n:href="Objednavky:objednejKosik $kosik->id_kosiku">Objednat</a>
                     {/if}
                 </td>

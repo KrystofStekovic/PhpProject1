@@ -21,28 +21,27 @@
                 <th></th>
             </tr>
             <tr n:foreach="$produkty as $produkt">
-                <!--<td>{$produkt->datum_vytvoreni|date:'j. n. Y G:i'}</td>-->
                 <td>{$produkt->produkt}</td>
                 <td>{$produkt->mnozstvi}</td>
                 <td>{$produkt->cena}</td>
-                {if $prehled->id_uzivatele == $user->id && !$prehled->stav}
-                    <td>
-                        <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku">Smazat</a>
-                    </td>
-                {/if}
+                <td>
+                    {if $prehled->stav == 'nový'}
+                        <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku, 'detail'">Smazat</a>
+                    {/if}
+                </td>
             </tr>
-        </table>
-        <hr>
-        <table style="width:100%">
+            <tr>
+                <td colspan="4"><hr></td>
+            </tr>
             <tr>
                 <td style="font-weight: bold">Celkem:</td>
                 <td>{$prehled->produkty_celkem}</td>
                 <td>{$prehled->suma}</td>
-                {if $prehled->id_uzivatele == $user->id && !$prehled->stav}
-                    <td>
+                <td>
+                    {if $prehled->stav == 'nový'}
                         <a n:href="Objednavky:objednejKosik $prehled->id_kosiku">Objednat</a>
-                    </td>
-                {/if}
+                    {/if}
+                </td>
             </tr>
         </table>
     {/if}

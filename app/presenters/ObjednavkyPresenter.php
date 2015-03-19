@@ -53,7 +53,7 @@ class ObjednavkyPresenter extends BasePresenter {
 
     public function actionSmazatProdukt($produktId, $kosikId, $default) {
         $this->kosikManager->smazProdukt($produktId, $kosikId);
-        if($default){
+        if($default == 'default'){
             $this->redirect('default');
         }else{
             $this->redirect('detail?idKosiku=' . $kosikId);
@@ -88,6 +88,8 @@ class ObjednavkyPresenter extends BasePresenter {
     public function vytvorObjednavku($form, $values) {
         $idKosiku = $this->getParameter('idKosiku');
         $this->objednavkyManager->objednejKosik($this->user->id, $idKosiku, $values->jmeno, $values->prijmeni);
+        $this->flashMessage('Košík byl objednán', 'success');
+        $this->redirect('default');
     }
 
 }
