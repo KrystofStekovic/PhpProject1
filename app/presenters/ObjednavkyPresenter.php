@@ -51,9 +51,13 @@ class ObjednavkyPresenter extends BasePresenter {
         $this['objednavkaForm']->setDefaults(array('idKosiku' => $idKosiku));
     }
 
-    public function actionSmazatProdukt($produktId, $kosikId) {
+    public function actionSmazatProdukt($produktId, $kosikId, $default) {
         $this->kosikManager->smazProdukt($produktId, $kosikId);
-        $this->redirect('detail?idKosiku=' . $kosikId);
+        if($default){
+            $this->redirect('default');
+        }else{
+            $this->redirect('detail?idKosiku=' . $kosikId);
+        }
     }
 
     public function actionPotvrdit($objednavkaID) {

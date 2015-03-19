@@ -3,7 +3,9 @@
 {block content}
 <header>
     <nav>
-        <a n:href="Objednavky:admin">Sprava Objednavek</a>
+        {if $user->isInRole('admin')}
+            <a n:href="Objednavky:admin">Sprava Objednavek</a>
+        {/if}
     </nav>  
 </header>
 
@@ -24,7 +26,7 @@
             <td style="width:25%">{$produkt->mnozstvi}</td>
             <td style="width:25%">{$produkt->cena}</td>
             <td style="width:25%">
-                <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku">Smazat</a>
+                <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku, 'defaut'">Smazat</a>
             </td>
         </tr>
     </table>

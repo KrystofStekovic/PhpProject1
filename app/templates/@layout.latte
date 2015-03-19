@@ -20,7 +20,7 @@
                 <!--<a class="prvekMenu" n:href="Aktuality:default">Aktuality</a>-->
                 <a class="prvekMenu" n:href="Produkty:default">Produkty</a>
                 {if $user->isLoggedIn()}
-                    <a class="prvekMenu" n:href="Objednavky:default">Kosiky</a>
+                    <a class="prvekMenu" n:href="Objednavky:default">Kosik</a>
                 {/if}
                 {if $user->isInRole('admin')}          
                     <a class="prvekMenu" n:href="Materialy:default">Materialy</a>

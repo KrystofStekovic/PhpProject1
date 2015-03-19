@@ -44,12 +44,11 @@ class KosikManager extends Nette\Object {
             COUNT(zk.id_zbozi) AS produkty, 
             SUM(zk.mnozstvi) AS produkty_celkem,
             Sum(p.cena*zk.mnozstvi) AS suma,
-            o.stav AS stav
+            k.stav AS stav
                 FROM kosiky k 
                     NATURAL JOIN uzivatele u
                     NATURAL JOIN zbozi_kosik zk
                     INNER JOIN produkty p ON zk.id_zbozi = p.id_produktu
-                    LEFT OUTER JOIN objednavky o ON k.id_kosiku = o.id_kosiku
                 ' . ($idkosiku ? $where : '') . '  
                 GROUP BY k.id_kosiku
                 ORDER BY k.datum_vytvoreni DESC';
@@ -64,8 +63,8 @@ class KosikManager extends Nette\Object {
             datum_vytvoreni, 
             produkty.nazev AS produkt, 
             zbozi_kosik.mnozstvi AS mnozstvi,
-            (zbozi_kosik.mnozstvi*produkty.cena) AS cena
-            
+            (zbozi_kosik.mnozstvi*produkty.cena) AS cena,
+            id_uzivatele
                 FROM kosiky 
                     NATURAL JOIN zbozi_kosik
                     INNER JOIN produkty ON zbozi_kosik.id_zbozi = produkty.id_produktu
@@ -75,12 +74,11 @@ class KosikManager extends Nette\Object {
     }
 
     public function getOpenKosik($user) {
-        $sql = 'SELECT k.id_kosiku AS id_kosiku,
+        $sql = "SELECT k.id_kosiku AS id_kosiku,
                     k.id_uzivatele AS id_uzivatele,
                     k.datum_vytvoreni AS datum
            	FROM kosiky k 
-                    LEFT OUTER JOIN objednavky o ON k.id_kosiku = o.id_kosiku
-                WHERE o.id_objednavky is null AND k.id_uzivatele =  ? ';
+                WHERE k.stav = 'nový' AND k.id_uzivatele =  ? ";
         $kosik = $this->database->queryArgs($sql, array($user->id))->fetch();
 //        $kosik = $this->database->table(self::TABLE_NAME_KOSIKY)
 //                ->where(self::COLUMN_ID_UZIVATELE . ' = ? ', $user->id);
