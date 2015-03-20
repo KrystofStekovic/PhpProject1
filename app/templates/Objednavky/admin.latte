@@ -19,6 +19,7 @@
             <th></th>
         </tr>
         <tr n:foreach="$objednavky as $objednavka">
+            {if $objednavka->stav != 'nový'}
             <td>{$objednavka->datum_vytvoreni|date:'j. n. Y G:i'}</td>
             <td>{$objednavka->jmeno} {$objednavka->prijmeni}</td>
             <td>{$objednavka->stav}</td>
@@ -30,6 +31,7 @@
                     <a n:href="Objednavky:odeslano $objednavka->id_kosiku">Odeslano</a>
                 {/if}
             </td>
+            {/if}
         </tr>
     </table>
 
