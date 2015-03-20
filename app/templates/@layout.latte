@@ -24,7 +24,7 @@
                     <a class="prvekMenu" n:href="Sign:out">Odhlasit</a>
                 {else}
                     <a class="prvekMenu" n:href="Sign:in">Přihlásit</a>
-                    <a class="prvekMenu" n:href="Sign:out">Registrovat</a>
+                    <a class="prvekMenu" n:href="Sign:novy">Registrovat</a>
                 {/if}
                 {if $user->isInRole('admin')}          
                     <a class="prvekMenu" n:href="Materialy:default">Materialy</a>

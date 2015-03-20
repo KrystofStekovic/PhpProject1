@@ -66,23 +66,23 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
 //        $latte = new Nette\Latte\Engine;
 //        $latte->renderToString('registremail.latte', $params);
 //        $template = $this->createTemplate()->setFile('registrEmail.latte');
-        $html = '<a href="http://localhost/PhpProject1/www/Sign/activUser?activCode='.$params['activCode'].'">';
-        $mail = new Message;
-        $mail->setFrom('Franta <tofisk@gmail.com>')
-                ->addTo('krystofstekovic@gmail.com')
-                ->setSubject('Potvrzení registrace')
-                ->setBody('neco');
-        $mailer = new Nette\Mail\SmtpMailer(array(
-            'host' => 'smtp.gmail.com',
-            'username' => 'tofisk@gmail.com',
-            'password' => 'rh7u5b24h',
-            'secure' => 'ssl',
-        ));
-        $mailer->send($mail);
+//        $html = '<a href="http://localhost/PhpProject1/www/Sign/activUser?activCode='.$params['activCode'].'">';
+//        $mail = new Message;
+//        $mail->setFrom('Franta <tofisk@gmail.com>')
+//                ->addTo('krystofstekovic@gmail.com')
+//                ->setSubject('Potvrzení registrace')
+//                ->setBody('neco');
+//        $mailer = new Nette\Mail\SmtpMailer(array(
+//            'host' => 'smtp.gmail.com',
+//            'username' => 'tofisk@gmail.com',
+//            'password' => 'rh7u5b24h',
+//            'secure' => 'ssl',
+//        ));
+//        $mailer->send($mail);
         $this->database->table(self::TABLE_NAME)->insert(array(
             self::COLUMN_NAME => $username,
             self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
-            self::COLUMN_ACTIV_CODE => $params->activ_code
+            self::COLUMN_ACTIV_CODE => $params['activCode']
         ));
     }
 
