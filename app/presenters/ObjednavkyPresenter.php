@@ -34,6 +34,7 @@ class ObjednavkyPresenter extends BasePresenter {
         $this->template->kosiky = $this->kosikManager->getPrehledKosiku($this->user, null);
         $kosik = $this->kosikManager->getOpenKosik($this->user);
         $this->template->produkty = $this->kosikManager->getObsahKosiku($kosik->id_kosiku);
+        $this->template->prehled = $this->kosikManager->getPrehledKosiku($this->user, $kosik->id_kosiku)->fetch();
     }
 
     public function renderDetail($idKosiku) {

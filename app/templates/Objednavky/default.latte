@@ -13,23 +13,38 @@
     <header>
         <h1>Prehled kosiku</h1>
     </header>
-    <table style="width:100%">
-        <tr>
-            <th>Produkt</th>
-            <th>Mnozstvi</th>
-            <th>Cena</th>
-            <th></th>
-        </tr>
-        <tr n:foreach="$produkty as $produkt">
-            <!--<td>{$produkt->datum_vytvoreni|date:'j. n. Y G:i'}</td>-->
-            <td style="width:25%">{$produkt->produkt}</td>
-            <td style="width:25%">{$produkt->mnozstvi}</td>
-            <td style="width:25%">{$produkt->cena}</td>
-            <td style="width:25%">
-                <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku, 'default'">Smazat</a>
-            </td>
-        </tr>
-    </table>
+    
+        <table style="width:100%">
+            <tr>
+                <th>Produkt</th>
+                <th>Mnozstvi</th>
+                <th>Cena</th>
+                <th></th>
+            </tr>
+            <tr n:foreach="$produkty as $produkt">
+                <td>{$produkt->produkt}</td>
+                <td>{$produkt->mnozstvi}</td>
+                <td>{$produkt->cena}</td>
+                <td>
+                    {if $prehled->stav == 'nový'}
+                        <a n:href="Objednavky:smazatProdukt $produkt->id_produktu, $produkt->id_kosiku, 'detail'">Smazat</a>
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><hr></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold">Celkem:</td>
+                <td>{$prehled->produkty_celkem}</td>
+                <td>{$prehled->suma}</td>
+                <td>
+                    {if $prehled->stav == 'nový'}
+                        <a n:href="Objednavky:objednejKosik $prehled->id_kosiku">Objednat</a>
+                    {/if}
+                </td>
+            </tr>
+        </table>
 </article>
 <article>  
     <header>
