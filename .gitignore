@@ -48,3 +48,4 @@ Temporary Items
 temp/
 cache/
 log/error.log
+*.neon
