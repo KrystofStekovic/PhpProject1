@@ -36,6 +36,6 @@ services:
 
 
 database:
-	dsn: 'mysql:host=localhost;dbname=vlada'
-	user: root
-	password: 
+	dsn: "mysql:host=wm85.wedos.net;dbname=d97420_biocul"
+	user: "a97420_biocul"
+	password: "1234mnbv"

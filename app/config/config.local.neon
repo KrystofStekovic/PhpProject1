@@ -1,9 +1,5 @@
-parameters:
-
 
 database:
-	dsn: 'mysql:host=127.0.0.1;dbname=vlada'
-	user: root
-	password: 
-	options:
-		lazy: yes
+	dsn: "mysql:host=wm85.wedos.net;dbname=d97420_biocul"
+	user: "a97420_biocul"
+	password: "1234mnbv"
