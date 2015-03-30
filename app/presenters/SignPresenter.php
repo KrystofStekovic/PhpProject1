@@ -50,9 +50,9 @@ class SignPresenter extends BasePresenter {
 
     public function addUserFormSucceeded($form, $values) {
 //        try{
-        $this->userManager->add($values->email, $values->heslo);
-        $this->flashMessage('Uspesna registrace.', 'success');
-        $this->redirect('Homepage:');
+//        $this->userManager->add($values->email, $values->heslo);
+//        $this->flashMessage('Uspesna registrace.', 'success');
+//        $this->redirect('Homepage:');
 //        } catch (Nette\Mail\SmtpException $e){
 //            Debugger::dump($e->getMessage());
 //        }
