@@ -30,11 +30,11 @@ class MaterialyPresenter extends BasePresenter {
 
     public function createComponentMaterialForm() {
         $form = new Form;
-        $form->addText('nazev', 'Nazev:')
+        $form->addText('nazev', 'Název:')
                 ->setRequired();
-        $form->addText('mnozstvi', 'Mnozstvi:')
+        $form->addText('mnozstvi', 'Množství:')
                 ->setRequired();        
-        $form->addSubmit('send', 'Ulozit material');
+        $form->addSubmit('send', 'Uložit materiál');
         $form->onSuccess[] = array($this, 'insertMaterial');
         return $form;
     }
@@ -49,7 +49,7 @@ class MaterialyPresenter extends BasePresenter {
             $this->flashMessage('Material byl úspěšně upraven.', 'success');
         } else {
             $material = $this->database->table('materialy')->insert($values);
-            $this->flashMessage('Material byl úspěšně vlozen.', 'success');
+            $this->flashMessage('Material byl úspěšně vložen.', 'success');
         }
         $this->redirect('this');
     }
@@ -64,7 +64,7 @@ class MaterialyPresenter extends BasePresenter {
     
     public function actionDelete($materialId) {        
         $this->database->table('materialy')->where('id_materialu', $materialId)->delete();
-        $this->flashMessage('Material byl úspěšně smazan.', 'success');
+        $this->flashMessage('Material byl úspěšně smazán.', 'success');
         $this->redirect('default');
     }
 

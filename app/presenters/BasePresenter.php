@@ -19,13 +19,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     protected function createComponentSignInForm() {
         $form = new Nette\Application\UI\Form;
         $form->addText('email', 'Email:')
-                ->setRequired('Napis svuj mail');
-//                ->addRule(Form::EMAIL, 'zadej spravne email');
+                ->setRequired('Napiš svůj email')
+                ->addRule(Form::EMAIL, 'Zadej správně email');
 
         $form->addPassword('heslo', 'heslo:')
-                ->setRequired('Napis svoje heslo.');
+                ->setRequired('Napiš svoje heslo.');
 
-        $form->addSubmit('send', 'Prihlasit');
+        $form->addSubmit('send', 'Přihlásit');
 
         // call method signInFormSucceeded() on success
         $form->onSuccess[] = array($this, 'signInFormSucceeded');

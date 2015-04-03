@@ -46,21 +46,21 @@ class ProduktyPresenter extends BasePresenter {
             $materialy[$value->id_materialu] = $value->nazev;
         }
         $form = new Form;
-        $form->addText('nazev', 'Nazev:')
+        $form->addText('nazev', 'Název:')
                 ->setRequired();
         $form->addText('popis', 'Popis:')
                 ->setRequired();
         $form->addText('cena', 'Cena:')
                 ->setRequired();
-        $form->addSelect('id_materialu', 'Material:', $materialy)
-                ->setPrompt('Zvolte meterial');
-        $form->addText('mnozstvi', 'Zobrazene mnozstvi:')
+        $form->addSelect('id_materialu', 'Materiál:', $materialy)
+                ->setPrompt('Zvolte meteriál');
+        $form->addText('mnozstvi', 'Zobrazené množství:')
                 ->setRequired();
-        $form->addText('odecetMnozstvi', 'Odpocitat ze skladu:')
+        $form->addText('odecetMnozstvi', 'Odpočítat ze skladu:')
                 ->setRequired();
-        $form->addUpload('obrazek', 'Obrazek:')
+        $form->addUpload('obrazek', 'Obrázek:')
                 ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
-        $form->addSubmit('send', 'Ulozit produkt');
+        $form->addSubmit('send', 'Uložit produkt');
         $form->onSuccess[] = array($this, 'insertProdukt');
         return $form;
     }
@@ -69,9 +69,9 @@ class ProduktyPresenter extends BasePresenter {
         $form = new Form;
         $form->addHidden('id_produktu');
         $form->addText('mnozstvi', '')
-                ->addRule(Form::INTEGER, 'Mnozstvi musi byt cislo')
+                ->addRule(Form::INTEGER, 'Množství musí být číslo')
                 ->setType('number');
-        $form->addSubmit('send', 'Pridat do kosiku');
+        $form->addSubmit('send', 'Přidat do košíku');
         $form->onSuccess[] = array($this, 'actionAddProduktu');
         return $form;
     }
@@ -84,7 +84,7 @@ class ProduktyPresenter extends BasePresenter {
             $this->flashMessage('Produkt byl úspěšně upraven.', 'success');
         } else {
             $this->produktyManager->insertProdukt($values);
-            $this->flashMessage('Produkt byl úspěšně vlozen.', 'success');
+            $this->flashMessage('Produkt byl úspěšně vložen.', 'success');
         }
         $this->redirect('this');
     }
@@ -99,7 +99,7 @@ class ProduktyPresenter extends BasePresenter {
 
     public function actionDelete($produktId) {
         $this->produktyManager->getProdukty($produktId);
-        $this->flashMessage('Produk byl úspěšně smazan.', 'success');
+        $this->flashMessage('Produk byl úspěšně smazán.', 'success');
         $this->redirect('default');
     }
 

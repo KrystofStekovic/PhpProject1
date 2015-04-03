@@ -3,20 +3,20 @@
 {block content}
 <header>
     <nav>
-        <a n:href="Objednavky:default">Zpatky</a>
+        <a n:href="Objednavky:default">Zpátky</a>
     </nav>  
 </header>
 
 <article>
     <header>
-        <h1>Detail Kosiku</h1>
+        <h1>Detail Košíku</h1>
     </header>
 
     {if $user->isInRole('admin') || $prehled->id_uzivatele == $user->id}
         <table style="width:100%">
             <tr>
                 <th>Produkt</th>
-                <th>Mnozstvi</th>
+                <th>Množství</th>
                 <th>Cena</th>
                 <th></th>
             </tr>

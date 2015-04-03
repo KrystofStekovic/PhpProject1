@@ -36,7 +36,7 @@ class AktualityPresenter extends BasePresenter {
                 ->setRequired();
         $form->addTextArea('text', 'Text:')
                 ->setRequired();
-        $form->addSubmit('send', 'Ulozit aktualitu');
+        $form->addSubmit('send', 'Uložit aktualitu');
         $form->onSuccess[] = array($this, 'insertAktualitu');
         return $form;
     }
@@ -66,7 +66,7 @@ class AktualityPresenter extends BasePresenter {
 
     public function actionDelete($aktualitaId) {
         $this->database->table('aktuality')->where('id_aktuality', $aktualitaId)->delete();
-        $this->flashMessage('Aktualita byla úspěšně smazana.', 'success');
+        $this->flashMessage('Aktualita byla úspěšně smazána.', 'success');
         $this->redirect('default');
     }
 

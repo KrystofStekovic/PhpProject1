@@ -13,8 +13,8 @@
 
     <table style="width:100%">
         <tr>
-            <th>Datum vytvoreni</th>
-            <th>Jmeno a prijmeni</th>
+            <th>Datum vytvoření</th>
+            <th>Jmeno a příjmení</th>
             <th>Stav</th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 {if $objednavka->stav == 'objednaný'}
                     <a n:href="Objednavky:potvrdit $objednavka->id_kosiku">Potvrdit</a>
                 {elseif $objednavka->stav == 'potvrzený'}
-                    <a n:href="Objednavky:odeslano $objednavka->id_kosiku">Odeslano</a>
+                    <a n:href="Objednavky:odeslano $objednavka->id_kosiku">Odesláno</a>
                 {/if}
             </td>
             {/if}

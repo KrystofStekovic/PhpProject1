@@ -77,9 +77,9 @@ class ObjednavkyPresenter extends BasePresenter {
 
     public function createComponentObjednavkaForm() {
         $form = new Form;
-        $form->addText('jmeno', 'Jmeno:')
+        $form->addText('jmeno', 'Jméno:')
                 ->setRequired();
-        $form->addText('prijmeni', 'Prijmeni:')
+        $form->addText('prijmeni', 'Příjmení:')
                 ->setRequired();
         $form->addSubmit('send', 'Objednej');
         $form->onSuccess[] = array($this, 'vytvorObjednavku');

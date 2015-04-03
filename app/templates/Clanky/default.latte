@@ -4,7 +4,7 @@
 <header>
     <nav>
         {if $user->isInRole('admin')}
-        <a n:href="Clanky:novy">Novy clanek</a>
+        <a n:href="Clanky:novy">Nový článek</a>
         {/if}
     </nav>  
 </header>
@@ -18,7 +18,7 @@
         <nav>
             <a n:href="Clanky:edit $clanek->id_clanku">Editovat</a>
             <a n:href="Clanky:delete $clanek->id_clanku">Smazat</a>
-            <a n:href="Clanky:novy">Novy clanek</a>
+            <a n:href="Clanky:novy">Nový článek</a>
         </nav>
     {/if}
     <p>{$clanek->datum|date:'j. n. Y'}</p>

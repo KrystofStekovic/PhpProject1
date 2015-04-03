@@ -4,20 +4,20 @@
 <header>
     <nav>
         {if $user->isInRole('admin')}
-            <a n:href="Objednavky:admin">Sprava Objednavek</a>
+            <a n:href="Objednavky:admin">Správa Objednávek</a>
         {/if}
     </nav>  
 </header>
 
 <article>
     <header>
-        <h1>Prehled kosiku</h1>
+        <h1>Přehled košíku</h1>
     </header>
     
         <table style="width:100%">
             <tr>
                 <th>Produkt</th>
-                <th>Mnozstvi</th>
+                <th>Množství</th>
                 <th>Cena</th>
                 <th></th>
             </tr>
@@ -53,9 +53,9 @@
 
     <table style="width:100%">
         <tr>
-            <th>Datum vytvoreni</th>
-            <th>Pocet produktu v kosiku</th> 
-            <th>Celkova cena kosiku</th>
+            <th>Datum vytvoření</th>
+            <th>Počet produktů v košíku</th> 
+            <th>Celková cena košíku</th>
             <th>Stav</th>
             <th></th>
         </tr>

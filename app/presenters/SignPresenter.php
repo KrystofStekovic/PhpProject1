@@ -31,13 +31,13 @@ class SignPresenter extends BasePresenter {
         $form = new Nette\Application\UI\Form;
         $form->addText('email', 'Email:')
                 ->setRequired('Napis svuj mail')
-                ->addRule(Form::EMAIL, 'zadej spravne email');
+                ->addRule(Form::EMAIL, 'Zadej správně email');
 
         $form->addPassword('heslo', 'heslo:')
-                ->setRequired('Napis svoje heslo.');
+                ->setRequired('Napiš svoje heslo.');
 
         $form->addPassword('hesloZnova', 'zopakovat heslo:')
-                ->setRequired('Napis svoje heslo.')
+                ->setRequired('Napiš svoje heslo.')
                 ->addRule(Form::EQUAL, 'Hesla se neshodují', $form['heslo']);
 
         //$form->addCheckbox('remember', 'Keep me signed in');

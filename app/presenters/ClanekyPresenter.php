@@ -37,7 +37,7 @@ class ClankyPresenter extends BasePresenter {
         $form->addTextArea('text', 'Text:')
                 ->setRequired()
                 ->getControlPrototype()->setClass('ckeditor');
-        $form->addSubmit('send', 'Ulozit clanek');
+        $form->addSubmit('send', 'Uložit článek');
         $form->onSuccess[] = array($this, 'insertClanek');
         return $form;
     }
@@ -49,10 +49,10 @@ class ClankyPresenter extends BasePresenter {
         if ($ClanekId) {
             $clanek = $this->database->table('clanky')->get($ClanekId);
             $clanek->update($values);
-            $this->flashMessage('Članek byl úspěšně upraven.', 'success');
+            $this->flashMessage('Článek byl úspěšně upraven.', 'success');
         } else {
             $clanek = $this->database->table('clanky')->insert($values);
-            $this->flashMessage('Članek byl úspěšně vlozen.', 'success');
+            $this->flashMessage('Članek byl úspěšně vložen.', 'success');
         }
         $this->redirect('this');
     }
@@ -67,7 +67,7 @@ class ClankyPresenter extends BasePresenter {
 
     public function actionDelete($clanekId) {
         $this->database->table('clanky')->where('id_clanku', $clanekId)->delete();
-        $this->flashMessage('Clanek byl úspěšně smazan.', 'success');
+        $this->flashMessage('Clanek byl úspěšně smazán.', 'success');
         $this->redirect('default');
     }
 
