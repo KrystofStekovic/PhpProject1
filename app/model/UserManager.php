@@ -6,7 +6,8 @@ use Nette,
     Nette\Utils\Strings,
     Nette\Mail\Message,
     Nette\Mail\SmtpMailer,
-    Nette\Security\Passwords;
+    Nette\Security\Passwords,
+    Nette\Tracy\Debugger;
 
 /**
  * Users management.
@@ -37,7 +38,7 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
     public function authenticate(array $credentials) {
         list($username, $password) = $credentials;
 
-        $row = $this->database->table(self::TABLE_NAME)->where(self::COLUMN_NAME, $username)->fetch();
+        $row = $this->database->table(self::TABLE_NAME)->where('email = ? AND actived = ?', $username, 1)->fetch();
 
         if (!$row) {
             throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
@@ -60,30 +61,23 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
      * @param  string
      * @return void
      */
-    public function add($username, $password) {
+    public function add($username, $password, $activeCode) {
         $params = array(
             'activCode' => Strings::random(150, 'A-Za-z0-9'));
 //        $latte = new Nette\Latte\Engine;
 //        $latte->renderToString('registremail.latte', $params);
 //        $template = $this->createTemplate()->setFile('registrEmail.latte');
-//        $html = '<a href="http://localhost/PhpProject1/www/Sign/activUser?activCode='.$params['activCode'].'">';
-//        $mail = new Message;
-//        $mail->setFrom('Franta <tofisk@gmail.com>')
-//                ->addTo('krystofstekovic@gmail.com')
-//                ->setSubject('Potvrzení registrace')
-//                ->setBody('neco');
-//        $mailer = new Nette\Mail\SmtpMailer(array(
-//            'host' => 'smtp.gmail.com',
-//            'username' => 'tofisk@gmail.com',
-//            'password' => 'rh7u5b24h',
-//            'secure' => 'ssl',
-//        ));
-//        $mailer->send($mail);
+
         $this->database->table(self::TABLE_NAME)->insert(array(
             self::COLUMN_NAME => $username,
             self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
-            self::COLUMN_ACTIV_CODE => $params['activCode']
+            self::COLUMN_ACTIV_CODE => $activeCode
         ));
+    }
+
+    public function activateUser($activCode) {
+        $user = $this->database->table(self::TABLE_NAME)->where('activ_code = ?', $activCode);
+        $user->update(array(self::COLUMN_ACTIVED => 1));
     }
 
 }

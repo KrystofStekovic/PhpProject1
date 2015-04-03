@@ -36,10 +36,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
         try {
             $this->user->login($values->email, $values->heslo);
-            $this->flashMessage('Uspesne prihlaseni.', 'success');
+            $this->flashMessage('Podařilo se úspěšně přihlásit.', 'success');
             $this->redirect('Homepage:');
         } catch (Nette\Security\AuthenticationException $e) {
-            $form->addError($e->getTrace());
+            $this->flashMessage('Nepodařilo se úspěšně přihlásit, zkuste to prosím znova.', 'success');
         }
     }
 

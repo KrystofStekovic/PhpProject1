@@ -30,23 +30,23 @@
                     <a class="prvekMenu" n:href="Materialy:default">Materialy</a>
                 {/if}
             </nav>
+            <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
         </header>
 
-            <section>
+        <section>
 
-                <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-                {include content}
-            </section>
+            {include content}
+        </section>
 
-            <footer>
-                Vsechna prava vyhrazena.
-            </footer>
+        <footer>
+            Vsechna prava vyhrazena.
+        </footer>
 
-            {block scripts}
-            <script src="{$basePath}/js/jquery.js"></script>
-            <script src="{$basePath}/js/netteForms.js"></script>
-            <script src="{$basePath}/js/main.js"></script>
-            <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
-            {/block}
+        {block scripts}
+        <script src="{$basePath}/js/jquery.js"></script>
+        <script src="{$basePath}/js/netteForms.js"></script>
+        <script src="{$basePath}/js/main.js"></script>
+        <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+        {/block}
     </body>
 </html>

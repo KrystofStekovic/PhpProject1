@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use Nette,
+    Nette\Utils\Strings,
     Nette\Application\UI\Form;
 
 /**
@@ -17,10 +18,10 @@ class SignPresenter extends BasePresenter {
     public $userManager;
 
     /**
-     * @var Nette\Mail\SmtpMailer 
+     * @var \App\Model\MailManager 
      * @inject
      */
-    public $mailer;
+    public $mailManager;
 
     public function __construct(Nette\Database\Context $database) {
         $this->database = $database;
@@ -49,13 +50,21 @@ class SignPresenter extends BasePresenter {
     }
 
     public function addUserFormSucceeded($form, $values) {
-//        try{
-//        $this->userManager->add($values->email, $values->heslo);
-//        $this->flashMessage('Uspesna registrace.', 'success');
-//        $this->redirect('Homepage:');
-//        } catch (Nette\Mail\SmtpException $e){
-//            Debugger::dump($e->getMessage());
-//        }
+        try {
+            $activCode = Strings::random(150, 'A-Za-z0-9');
+
+            $this->userManager->add($values->email, $values->heslo, $activCode);
+            
+            $latte = new \Latte\Engine();
+            $params = array('activCode' => $activCode);
+            $html = $latte->renderToString(__DIR__ . '/../templates/regemail.latte', $params);
+            $this->mailManager->sendRegEmail($values->email, $html);
+            
+            $this->flashMessage('Pro dokončení registrace kliněte na aktivační odkaz, který vám byl odeslán na email', 'success');
+            $this->redirect('Homepage:');
+        } catch (Exception $exc) {
+//            echo $exc->getTraceAsString();
+        }
     }
 
     public function actionOut() {
@@ -64,8 +73,11 @@ class SignPresenter extends BasePresenter {
         $this->redirect('in');
     }
 
-    public function renderAktivUser($activCode) {
-        $this->template->code = $activCode;
+    public function actionAktivUser($activCode) {
+//        var_dump($activCode);
+        $this->userManager->activateUser($activCode);
+        $this->flashMessage('Účet byl aktivován.');
+        $this->redirect('Homepage:');
     }
 
 }
