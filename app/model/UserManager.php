@@ -57,27 +57,32 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
 
     /**
      * Adds new user.
-     * @param  string
-     * @param  string
-     * @return void
+     * @param String username registracni email
+     * @param String password heslo uzivatele
+     * @param String activeCode aktivacni cod
      */
     public function add($username, $password, $activeCode) {
-        $params = array(
-            'activCode' => Strings::random(150, 'A-Za-z0-9'));
-//        $latte = new Nette\Latte\Engine;
-//        $latte->renderToString('registremail.latte', $params);
-//        $template = $this->createTemplate()->setFile('registrEmail.latte');
-
         $this->database->table(self::TABLE_NAME)->insert(array(
             self::COLUMN_NAME => $username,
             self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
             self::COLUMN_ACTIV_CODE => $activeCode
         ));
     }
-
+    
+    /**
+     * Aktivuje ucet uzivatele pokud se aktivacni cod shoduje s udajem v databazi
+     * @param String activCode aktivacni cod
+     */
     public function activateUser($activCode) {
         $user = $this->database->table(self::TABLE_NAME)->where('activ_code = ?', $activCode);
         $user->update(array(self::COLUMN_ACTIVED => 1));
+    }
+
+    public function changePass($email, $heslo, $stareHeslo) {
+        $user = $this->database->table(self::TABLE_NAME)->where('email = ? AND heslo', $email);
+        if($stareHeslo){
+            
+        }
     }
 
 }
