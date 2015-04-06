@@ -32,39 +32,50 @@ class SignPresenter extends BasePresenter {
         $form->addText('email', 'Email:')
                 ->setRequired('Napis svuj mail')
                 ->addRule(Form::EMAIL, 'Zadej správně email');
-
-        $form->addPassword('heslo', 'heslo:')
+        $form->addPassword('heslo', 'Heslo:')
                 ->setRequired('Napiš svoje heslo.');
-
-        $form->addPassword('hesloZnova', 'zopakovat heslo:')
-                ->setRequired('Napiš svoje heslo.')
+        $form->addPassword('hesloZnova', 'Zopakovat heslo:')
+                ->setRequired('Napiš svoje heslo znovu pro kontrolu.')
                 ->addRule(Form::EQUAL, 'Hesla se neshodují', $form['heslo']);
-
-        //$form->addCheckbox('remember', 'Keep me signed in');
-
         $form->addSubmit('send', 'Registrovat');
-
         // call method signInFormSucceeded() on success
         $form->onSuccess[] = array($this, 'addUserFormSucceeded');
+        return $form;
+    }
+
+    protected function createComponentForgotPass() {
+        $form = new Nette\Application\UI\Form;
+        $form->addText('email', 'Email:')
+                ->setRequired('Napis svuj mail')
+                ->addRule(Form::EMAIL, 'Zadej správně email');
+        $form->addPassword('heslo', 'Heslo:')
+                ->setRequired('Napiš svoje heslo.');
+        $form->addPassword('hesloZnova', 'Zopakovat heslo:')
+                ->setRequired('Napiš svoje heslo.')
+                ->addRule(Form::EQUAL, 'Hesla se neshodují', $form['heslo']);
+        $form->addSubmit('send', 'Obnovit heslo');
+        // call method signInFormSucceeded() on success
+        $form->onSuccess[] = array($this, 'forgorPassFormSucceeded');
         return $form;
     }
 
     public function addUserFormSucceeded($form, $values) {
         try {
             $activCode = Strings::random(150, 'A-Za-z0-9');
-
             $this->userManager->add($values->email, $values->heslo, $activCode);
-            
             $latte = new \Latte\Engine();
             $params = array('activCode' => $activCode);
             $html = $latte->renderToString(__DIR__ . '/../templates/regemail.latte', $params);
             $this->mailManager->sendRegEmail($values->email, $html);
-            
             $this->flashMessage('Pro dokončení registrace kliněte na aktivační odkaz, který vám byl odeslán na email', 'success');
             $this->redirect('Homepage:');
         } catch (Exception $exc) {
 //            echo $exc->getTraceAsString();
         }
+    }
+
+    public function forgorPassFormSucceeded($form, $values) {
+        $this->userManager->changePass($values->email, $values->heslo, null);
     }
 
     public function actionOut() {
