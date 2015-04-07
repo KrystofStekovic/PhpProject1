@@ -49,3 +49,4 @@ temp/
 cache/
 log/error.log
 *.neon
+nbproject/private/private.xml

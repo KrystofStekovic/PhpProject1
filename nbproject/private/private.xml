@@ -11,6 +11,7 @@
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Clanky/default.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Produkty/default.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/log/web.config</file>
+            <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/verifymail.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Objednavky/detail.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/presenters/MaterialyPresenter.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Produkty/edit.latte</file>
@@ -39,6 +40,7 @@
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/regemail.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/model/ProduktyManager.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Materialy/edit.latte</file>
+            <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Sign/forgotPass.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/presenters/ErrorPresenter.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/templates/Clanky/detail.latte</file>
             <file>file:/C:/xampp/htdocs/PhpProject1/app/model/KosikManager.php</file>

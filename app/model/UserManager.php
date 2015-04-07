@@ -21,7 +21,8 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
             COLUMN_PASSWORD_HASH = 'heslo',
             COLUMN_ROLE = 'role',
             COLUMN_ACTIVED = 'actived',
-            COLUMN_ACTIV_CODE = 'activ_code';
+            COLUMN_ACTIV_CODE = 'activ_code',
+            COLUMN_NEW_PASS = 'new_pass';
 
     /** @var Nette\Database\Context */
     private $database;
@@ -78,6 +79,34 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
     public function activateUser($activCode) {
         $user = $this->database->table(self::TABLE_NAME)->where('activ_code = ?', $activCode);
         $user->update(array(self::COLUMN_ACTIVED => 1));
+    }
+
+    public function changePass($email, $newPass, $oldPass, $activCode) {
+        if (!$oldPass) {
+            // vytvorit nove heslo a pockat po potvrzeni pres 
+            $user = $this->database->table(self::TABLE_NAME)->where('email = ?', $email);
+            $user->update(array(self::COLUMN_NEW_PASS => Passwords::hash($newPass),
+                self::COLUMN_ACTIV_CODE => $activCode));
+        } else {
+            // prima zmena s overenim stejnosti stareho 
+            $user = $this->database->table(self::TABLE_NAME)->where('email = ? AND heslo ?', array(
+                self::COLUMN_NAME => $email,
+                self::COLUMN_PASSWORD_HASH => Passwords::hash($oldPass)));
+            $user->update(array(self::COLUMN_PASSWORD_HASH => Passwords::hash($newPass),
+                self::COLUMN_ACTIV_CODE => $activCode));
+        }
+    }
+
+    public function confirmChangePass($email, $activCode) {
+//        $user = $this->database->table(self::TABLE_NAME)->where('activ_code = ? AND email = ?', array(
+//                    self::COLUMN_NAME => $email,
+//                    self::COLUMN_ACTIV_CODE => $activCode))->fetch();
+        $user = $this->database->table(self::TABLE_NAME)->where('activ_code = ?', $activCode)->fetch();
+        if ($user) {
+            $user->update(array(
+                self::COLUMN_PASSWORD_HASH => $user[self::COLUMN_NEW_PASS]
+            ));
+        }
     }
 
 }
