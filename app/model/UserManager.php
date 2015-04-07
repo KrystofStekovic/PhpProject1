@@ -7,7 +7,8 @@ use Nette,
     Nette\Mail\Message,
     Nette\Mail\SmtpMailer,
     Nette\Security\Passwords,
-    Nette\Tracy\Debugger;
+    Nette\Tracy\Debugger,
+    Exception;
 
 /**
  * Users management.
@@ -61,14 +62,15 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
      * @param  string
      * @param  string
      * @return void
+     * @throws Exception
      */
     public function add($username, $password, $activeCode) {
+        $user = $this->database->table(self::TABLE_NAME)->where('email = ?', $username)->fetch();
+        if($user){
+            throw new Exception('Uživatel s touto emailovou adresou je již registrovaný.');
+        }
         $params = array(
             'activCode' => Strings::random(150, 'A-Za-z0-9'));
-//        $latte = new Nette\Latte\Engine;
-//        $latte->renderToString('registremail.latte', $params);
-//        $template = $this->createTemplate()->setFile('registrEmail.latte');
-
         $this->database->table(self::TABLE_NAME)->insert(array(
             self::COLUMN_NAME => $username,
             self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
@@ -82,6 +84,10 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator 
     }
 
     public function changePass($email, $newPass, $oldPass, $activCode) {
+        $user = $this->database->table(self::TABLE_NAME)->where('email = ?', $email)->fetch();
+        if(!$user){
+            throw new Exception('Uživatel s touto emailovou adresou není registrovaný.');
+        }
         if (!$oldPass) {
             // vytvorit nove heslo a pockat po potvrzeni pres 
             $user = $this->database->table(self::TABLE_NAME)->where('email = ?', $email);

@@ -4,7 +4,8 @@ namespace App\Presenters;
 
 use Nette,
     Nette\Utils\Strings,
-    Nette\Application\UI\Form;
+    Nette\Application\UI\Form,
+    Exception;
 
 /**
  * Sign in/out presenters.
@@ -80,22 +81,26 @@ class SignPresenter extends BasePresenter {
             $this->flashMessage('Pro dokončení registrace kliněte na aktivační odkaz, který vám byl odeslán na email', 'success');
             $this->redirect('Homepage:');
         } catch (Exception $exc) {
-//            echo $exc->getTraceAsString();
+            $this->flashMessage($exc->getMessage());
         }
     }
 
     public function forgotPass($form, $values) {
-        $activCode = Strings::random(150, 'A-Za-z0-9');
-        $this->userManager->changePass($values->email, $values->heslo, null, $activCode);
+        try {
+            $activCode = Strings::random(150, 'A-Za-z0-9');
+            $this->userManager->changePass($values->email, $values->heslo, null, $activCode);
 
-        $latte = new \Latte\Engine();
-        $params = array('activCode' => $activCode,
-            'email' => $values->email);
-        $html = $latte->renderToString(__DIR__ . '/../templates/verifymail.latte', $params);
+            $latte = new \Latte\Engine();
+            $params = array('activCode' => $activCode,
+                'email' => $values->email);
+            $html = $latte->renderToString(__DIR__ . '/../templates/verifymail.latte', $params);
 
-        $this->mailManager->sendForgotPass($values->email, $html);
-        $this->flashMessage('Byl vám odeslán potvrzující email. Pro dokončení změny hesla klikněte na odkaz v emailu.');
-        $this->redirect('Homepage:');
+            $this->mailManager->sendForgotPass($values->email, $html);
+            $this->flashMessage('Byl vám odeslán potvrzující email. Pro dokončení změny hesla klikněte na odkaz v emailu.');
+            $this->redirect('Homepage:');
+        } catch (Exception $exc) {
+            $this->flashMessage($exc->getMessage());
+        }
     }
 
     public function actionOut() {
