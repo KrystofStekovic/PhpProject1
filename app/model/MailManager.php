@@ -27,10 +27,21 @@ class MailManager extends Nette\Object {
     
     public function sendRegEmail($email, $html){
         $mail = new Message;
-        $mail->setFrom('BioCulture Registrace <registrace@bioculture.cz>')
+        $mail->setFrom('BioCulture <registrace@bioculture.cz>')
                 ->addTo($email)
                 ->setSubject('Potvrzení registrace')
                 ->setHtmlBody($html);
         $this->mailer->send($mail);
     }
+
+    public function sendForgotPass($email, $html) {
+        $mail = new Message;
+        $mail->setFrom('BioCulture <registrace@bioculture.cz>')
+                ->addTo($email)
+                ->setSubject('Potvrzení změny hesla')
+                ->setHtmlBody($html);
+        $this->mailer->send($mail);
+        
+    }
+
 }
