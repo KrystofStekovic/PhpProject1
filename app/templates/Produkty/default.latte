@@ -14,14 +14,14 @@
     <header class="nazevProduktu">
         <b>{$produkt->nazev}</b>
     </header>
-
-    <img class="produkty" src="{$obrazky[$produkt->id_produktu]|dataStream}" >
-
+    {if $obrazky[$produkt->id_produktu]!=null}
+        <img class="produkty" src="{$obrazky[$produkt->id_produktu]|dataStream}" >
+    {/if}
     <div class="popisProdukut"> 
         <p><b>Popis: </b>{$produkt->popis}</p>
-        <p><b>Cena: </b>{$produkt->cena|number:0:',':' '} Kč</p>
-        <p><b>Material: </b>{$produkt->id_materialu}</p>
-        <p><b>Množství: </b>{$produkt->mnozstvi}</p>
+        <p><b>Cena: </b>{$produkt->cena|number:0:',':' '} Kč</p>        
+        <p><b>Material: </b>{if $produkt->id_materialu}{$materialy[$produkt->id_materialu]}{/if}</p>        
+        <p><b>Množství na skladě: </b>{$produkt->mnozstvi}</p>
     </div>
     {if $user->isLoggedIn()}
         {form mnozstviForm}

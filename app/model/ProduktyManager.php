@@ -8,8 +8,7 @@
 
 namespace App\Model;
 
-use Nette,
-    Nette\Utils\Image;
+use Nette;
 
 /**
  * Description of ProduktyManager
@@ -34,46 +33,28 @@ LEFT OUTER JOIN zbozi_kosik zk ON p.id_materialu = zk.id_zbozi
 ";
         return $this->database->table('produkty');
     }
+    
+    public function getMaterialy(){
+        $mat = $this->database->table('materialy');
+        foreach ($mat as $material) {
+            $materialy[$material->id_materialu] = $material->nazev;
+        }
+        return $materialy;
+    }
 
     public function getProdukt($idProduktu) {
         return $this->database->table('produkty')->get($idProduktu);
     }
 
-    public function getObrazkyProduktu() {
-        $produkty = $this->database->table('produkty');
-        foreach ($produkty as $produkt) {
-            $obr = Image::fromFile($produkt->ref('obrazky', 'id_obrazku')->adresa);
-            $obr->resize(100, 100);
-            $obrazky[$produkt->id_produktu] = $obr;
-        }
-        return $obrazky;
-    }
-
     public function updateProdukt($values, $produktId) {
-        $adresa = 'images/';
-        if ($values->obrazek) {
-            $file = $values->obrazek;
-            $obrazek['nazev'] = $file->name;
-            $obrazek['adresa'] = $adresa . $file->name;
-            $file->move($adresa . $file->name);
-            $idObr = $this->database->table('produkty')->where('id_produktu', $produktId)->fetch()->ref('obrazky', 'id_obrazku')->id_obrazku;
-            $obr = $this->database->table('obrazky')->get($idObr);
-            $obr->update($obrazek);
-        }
         unset($values['obrazek']);
-        $produkt = $this->database->table('produkty')->get($produktId);
+        $produkt = $this->database->table('produkty')->where('id_produktu = ?', $produktId);
         $produkt->update($values);
     }
 
-    public function insertProdukt($values) {
-        $adresa = 'images/';
-        $file = $values->obrazek;
-        $obrazek['nazev'] = $file->name;
-        $obrazek['adresa'] = $adresa . $file->name;
-        $file->move($adresa . $file->name);
-        $obrazek = $this->database->table('obrazky')->insert($obrazek);
-        $values['id_obrazku'] = $obrazek->id_obrazku;
+    public function insertProdukt($values, $idObrazku) {
         unset($values['obrazek']);
+        $values['id_obrazku'] = $idObrazku;
         $this->database->table('produkty')->insert($values);
 //            $this->flashMessage('Produkt byl úspěšně vlozen.', 'success');
     }

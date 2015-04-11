@@ -30,6 +30,11 @@ class ProduktyPresenter extends BasePresenter {
      * @inject
      */
     public $produktyManager;
+    /**
+     * @var \App\Model\ObrazkyManager
+     * @inject
+     */
+    public $obrazkyManager;
 
     public function __construct(Nette\Database\Context $database) {
         $this->database = $database;
@@ -37,7 +42,8 @@ class ProduktyPresenter extends BasePresenter {
 
     public function renderDefault() {
         $this->template->produkty = $this->produktyManager->getProdukty();
-        $this->template->obrazky = $this->produktyManager->getObrazkyProduktu();
+        $this->template->obrazky = $this->obrazkyManager->getObrazkyProduktu();
+        $this->template->materialy = $this->produktyManager->getMaterialy();
     }
 
     public function createComponentProduktForm() {
@@ -79,11 +85,14 @@ class ProduktyPresenter extends BasePresenter {
     public function insertProdukt($form, $values) {
 
         $produktId = $this->getParameter('produktId');
+        $produkt = $this->produktyManager->getProdukt($produktId);
         if ($produktId) {
+            $this->obrazkyManager->updateObrazek($produkt->id_obrazku, $values->obrazek);
             $this->produktyManager->updateProdukt($values, $produktId);
             $this->flashMessage('Produkt byl úspěšně upraven.', 'success');
         } else {
-            $this->produktyManager->insertProdukt($values);
+            $idObrazku = $this->obrazkyManager->addObrazek($values->obrazek);
+            $this->produktyManager->insertProdukt($values, $idObrazku);
             $this->flashMessage('Produkt byl úspěšně vložen.', 'success');
         }
         $this->redirect('this');
