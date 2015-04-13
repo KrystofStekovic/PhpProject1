@@ -34,6 +34,7 @@
             <tr>
                 <td colspan="4"><hr></td>
             </tr>
+            {if isset($prehled->produkty_celkem)}
             <tr>
                 <td style="font-weight: bold">Celkem:</td>
                 <td>{$prehled->produkty_celkem}</td>
@@ -43,7 +44,7 @@
                         <a n:href="Objednavky:objednejKosik $prehled->id_kosiku">Objednat</a>
                     {/if}
                 </td>
-            </tr>
+            </tr>{/if}
         </table>
 </article>
 <article>  

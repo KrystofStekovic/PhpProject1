@@ -28,7 +28,7 @@ class SignPresenter extends BasePresenter {
         $this->database = $database;
     }
 
-    protected function createComponentNewUserForm() {
+    public function createComponentNewUserForm() {
         $form = new Nette\Application\UI\Form;
         $form->addText('email', 'Email:')
                 ->setRequired('Napiš svůj email')
@@ -44,7 +44,7 @@ class SignPresenter extends BasePresenter {
         return $form;
     }
 
-    protected function createComponentForgotPass() {
+    public function createComponentForgotPass() {
         $form = new Nette\Application\UI\Form;
         $form->addText('email', 'Email:')
 

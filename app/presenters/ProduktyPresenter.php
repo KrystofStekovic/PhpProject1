@@ -44,6 +44,7 @@ class ProduktyPresenter extends BasePresenter {
         $this->template->produkty = $this->produktyManager->getProdukty();
         $this->template->obrazky = $this->obrazkyManager->getObrazkyProduktu();
         $this->template->materialy = $this->produktyManager->getMaterialy();
+        $this->template->kosik = $this->kosikManager->getMnozVKosiku($this->user->id);
     }
 
     public function createComponentProduktForm() {
@@ -64,7 +65,7 @@ class ProduktyPresenter extends BasePresenter {
                 ->setRequired();
         $form->addText('odecetMnozstvi', 'Odpočítat ze skladu:')
                 ->setRequired();
-        $form->addUpload('obrazek', 'Obrázek:')
+        $form->addUpload('obrazek', 'Obrázek:', TRUE)
                 ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
         $form->addSubmit('send', 'Uložit produkt');
         $form->onSuccess[] = array($this, 'insertProdukt');
@@ -77,7 +78,7 @@ class ProduktyPresenter extends BasePresenter {
         $form->addText('mnozstvi', '')
                 ->addRule(Form::INTEGER, 'Množství musí být číslo')
                 ->setType('number');
-        $form->addSubmit('send', 'Přidat do košíku');
+        $form->addSubmit('send', 'Přepočítat');
         $form->onSuccess[] = array($this, 'actionAddProduktu');
         return $form;
     }

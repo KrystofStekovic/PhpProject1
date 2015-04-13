@@ -30,6 +30,7 @@ class ObrazkyManager extends Nette\Object {
     public function addObrazek($file) {
         if ($file) {
             $adresa = 'images/';
+//            $file = $file->getValue();
             $obrazek['nazev'] = $file->name;
             $obrazek['adresa'] = $adresa . $file->name;
             $file->move($adresa . $file->name);
@@ -41,12 +42,17 @@ class ObrazkyManager extends Nette\Object {
     }
 
     public function updateObrazek($idObrazku, $file) {
-        $adresa = 'images/';
-        $obrazek['nazev'] = $file->name;
-        $obrazek['adresa'] = $adresa . $file->name;
-        $file->move($adresa . $file->name);
-        $obr = $this->database->table('obrazky')->get($idObrazku);
-        $obr->update($obrazek);
+        if ($file) {
+            $adresa = 'images/';
+//            $file = new Nette\Http\FileUpload($file);
+//            $file = $file->getValue();
+            
+            $obrazek['nazev'] = $file->name;
+            $obrazek['adresa'] = $adresa . $file->name;
+            $file->move($adresa . $file->name);
+            $obr = $this->database->table('obrazky')->get($idObrazku);
+            $obr->update($obrazek);
+        }
     }
 
     public function getObrazkyProduktu() {

@@ -7,12 +7,15 @@
             <a n:href="Materialy:novy">Nový materiál</a>
         </nav>  
     </header>
-    <table>
-        <tr n:foreach="$materialy as $material">
-            <td>{$material->nazev}</td>
-            <td>{$material->mnozstvi}</td>
-            <td><a n:href="Materialy:edit $material->id_materialu">Editovat</a></td>
-            <td><a n:href="Materialy:delete $material->id_materialu">Smazat</a></td>
-        </tr>
-    </table>
+
+    <article>
+        <table>
+            <tr n:foreach="$materialy as $material">
+                <td>{$material->nazev}</td>
+                <td>{$material->mnozstvi}</td>
+                <td><a n:href="Materialy:edit $material->id_materialu">Editovat</a></td>
+                <td><a n:href="Materialy:delete $material->id_materialu">Smazat</a></td>
+            </tr>
+        </table>
+    </article>
 {/if}

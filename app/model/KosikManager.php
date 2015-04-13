@@ -99,10 +99,15 @@ class KosikManager extends Nette\Object {
                 ->where(self::COLUMN_ID_ZBOZI . " = " . $idProduktu . " AND " . self::COLUMN_ID_KOSIKU . " = " . $kosik->id_kosiku)
                 ->fetch();
         if ($produkt) {
-            $produkt->update(array(
-                self::COLUMN_MNOZSTVI => $produkt->mnozstvi + $mnozstvi
-            ));
-        } else {
+            $mnoz = $produkt->mnozstvi + $mnozstvi;
+            if ($mnoz > 0) {
+                $produkt->update(array(
+                    self::COLUMN_MNOZSTVI => $produkt->mnozstvi + $mnozstvi
+                ));
+            } else {
+                $produkt->delete();
+            }
+        } else if ($mnozstvi > 0){
             $this->database->table(self::TABLE_NAME_ZBOZI_KOSIKU)->insert(array(
                 self::COLUMN_ID_KOSIKU => $kosik->id_kosiku,
                 self::COLUMN_ID_ZBOZI => $idProduktu,
@@ -115,6 +120,18 @@ class KosikManager extends Nette\Object {
         $this->database->table(self::TABLE_NAME_ZBOZI_KOSIKU)
                 ->where(self::COLUMN_ID_ZBOZI . " = " . $idProduktu . " AND " . self::COLUMN_ID_KOSIKU . " = " . $idkosiku)
                 ->delete();
+    }
+
+    public function getMnozVKosiku($idUzivatele) {
+        $sql = "SELECT zk.id_zbozi AS id_zbozi, zk.mnozstvi AS mnozstvi FROM zbozi_kosik zk
+JOIN (SELECT * FROM kosiky WHERE stav = 'nový') k ON zk.id_kosiku = k.id_kosiku 
+WHERE id_uzivatele = ?";
+        $mnoz = $this->database->queryArgs($sql, array($idUzivatele));
+        $mnozstvi = array();
+        foreach ($mnoz as $mn) {
+            $mnozstvi[$mn->id_zbozi] = $mn->mnozstvi;
+        }
+        return $mnozstvi;
     }
 
 }

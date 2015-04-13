@@ -4,9 +4,12 @@
 {if $user->isInRole('admin')}
     <header>
         <nav>
-                <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
+            <a n:href="Materialy:default">Zpátky</a>
         </nav>  
     </header>
-    <h2>Vytvoření nového materialu</h2>
-    {control materialForm}
+
+    <article>
+        <h2>Vytvoření nového materialu</h2>
+        {control materialForm}
+    </article>
 {/if}
