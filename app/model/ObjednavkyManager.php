@@ -29,6 +29,9 @@ class ObjednavkyManager {
             COLUMN_DATUM_OBJEDNANI = 'datum_objednani',
             COLUMN_JMENO = 'jmeno',
             COLUMN_PRIJMENI = 'prijmeni',
+            COLUMN_ADRESA = 'adresa',
+            COLUMN_MESTO = 'mesto',
+            COLUMN_PSC = 'psc',
             COLUMN_STAV = 'stav';
 
     /** @var Nette\Database\Context */
@@ -38,12 +41,15 @@ class ObjednavkyManager {
         $this->database = $database;
     }
 
-    public function objednejKosik($idUzivatele, $idkosiku, $jmeno, $prijmeni) {
+    public function objednejKosik($idUzivatele, $idkosiku, $jmeno, $prijmeni, $adresa, $mesto, $psc) {
         $kosik = $this->database->table('kosiky')->get($idkosiku);
         $kosik->update(array(
             self::COLUMN_STAV => 'objednaný',
             self::COLUMN_JMENO => $jmeno,
             self::COLUMN_PRIJMENI => $prijmeni,
+            self::COLUMN_ADRESA => $adresa,
+            self::COLUMN_MESTO => $mesto,
+            self::COLUMN_PSC => $psc,
             self::COLUMN_DATUM_OBJEDNANI => date("Y-m-d H:i:s")));
     }
 
@@ -64,7 +70,7 @@ class ObjednavkyManager {
     }
     
     public function getObjednavky(){
-        return $this->database->table(self::TABLE_NAME_KOSIKY);
+        return $this->database->table(self::TABLE_NAME_KOSIKY)->order(self::COLUMN_DATUM_VYTVORENI." DESC");
     }
 
 //    public function getObjednano() {

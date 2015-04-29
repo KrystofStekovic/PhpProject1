@@ -3,13 +3,13 @@
 {block content}
 <header>
     <nav>
-            <a n:href="Clanky:default">Zpátky</a>
+        <a n:href="Clanky:default">Zpátky</a>
     </nav>  
 </header>
 
 <article>
     <header>
-        {$clanek->nadpis}
+        <h1>{$clanek->nadpis}</h1>
     </header>
     <p>
         {$clanek->datum|date:'F j, Y'}

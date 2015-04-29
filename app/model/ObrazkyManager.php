@@ -28,28 +28,22 @@ class ObrazkyManager extends Nette\Object {
     }
 
     public function addObrazek($file) {
-        if ($file) {
-            $adresa = 'images/';
-//            $file = $file->getValue();
-            $obrazek['nazev'] = $file->name;
-            $obrazek['adresa'] = $adresa . $file->name;
-            $file->move($adresa . $file->name);
+        if (is_uploaded_file($file['tmp_name'][0])) {
+            $adresa = 'images/' . $file['name'][0];
+            move_uploaded_file($file['tmp_name'][0], $adresa);
+            $obrazek['nazev'] = $file['name'][0];
+            $obrazek['adresa'] = $adresa;
             $obrazek = $this->database->table('obrazky')->insert($obrazek);
             return $obrazek->id_obrazku;
-        } else {
-            return null;
-        }
+        } 
     }
 
     public function updateObrazek($idObrazku, $file) {
-        if ($file) {
-            $adresa = 'images/';
-//            $file = new Nette\Http\FileUpload($file);
-//            $file = $file->getValue();
-            
-            $obrazek['nazev'] = $file->name;
-            $obrazek['adresa'] = $adresa . $file->name;
-            $file->move($adresa . $file->name);
+        if (is_uploaded_file($file['tmp_name'][0])) {
+            $adresa = 'images/' . $file['name'][0];
+            move_uploaded_file($file['tmp_name'][0], $adresa);
+            $obrazek['nazev'] = $file['name'][0];
+            $obrazek['adresa'] = $adresa;
             $obr = $this->database->table('obrazky')->get($idObrazku);
             $obr->update($obrazek);
         }
@@ -64,6 +58,19 @@ class ObrazkyManager extends Nette\Object {
                 $obr->resize(100, 100);
                 $obrazky[$produkt->id_produktu] = $obr;
             }
+        }
+        return $obrazky;
+    }
+
+    public function getObrazky() {
+        $obr = $this->database->table('obrazky');
+        $obrazky = [];
+        foreach ($obr as $obrazek) {
+            $file = Image::fromFile($obrazek->adresa);
+            $file->resize(50, 50);
+            $pom['file'] = $file;
+            $pom['adresa'] = $obrazek->adresa;
+            array_push($obrazky, $pom);
         }
         return $obrazky;
     }

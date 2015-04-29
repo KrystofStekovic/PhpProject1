@@ -81,6 +81,13 @@ class ObjednavkyPresenter extends BasePresenter {
                 ->setRequired();
         $form->addText('prijmeni', 'Příjmení:')
                 ->setRequired();
+        $form->addText('adresa', 'Adresa:')
+                ->setRequired();
+        $form->addText('mesto', 'Město:')
+                ->setRequired();
+        $form->addText('psc', 'PSČ:')
+                ->setRequired()
+                ->addRule(Form::PATTERN, 'PSČ musí mít 5 číslic', '([0-9]\s*){5}');
         $form->addSubmit('send', 'Objednej');
         $form->onSuccess[] = array($this, 'vytvorObjednavku');
         return $form;
@@ -88,7 +95,7 @@ class ObjednavkyPresenter extends BasePresenter {
 
     public function vytvorObjednavku($form, $values) {
         $idKosiku = $this->getParameter('idKosiku');
-        $this->objednavkyManager->objednejKosik($this->user->id, $idKosiku, $values->jmeno, $values->prijmeni);
+        $this->objednavkyManager->objednejKosik($this->user->id, $idKosiku, $values->jmeno, $values->prijmeni, $values->adresa, $values->mesto, $values->psc);
         $this->flashMessage('Košík byl objednán', 'success');
         $this->redirect('default');
     }

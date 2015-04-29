@@ -1,0 +1,236 @@
+body {
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #333;
+    background: whitesmoke;
+    text-align: center;
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header{
+    color: black;
+    background-image: url(../images/head1.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    font-weight: bold;
+    /*background-image: url(../images/head.png);*/
+    /*background-color: bisque;*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 250px;
+}
+
+header nav{
+    position: relative;
+    top: 55px;
+    padding: 10px;
+    text-align: right;
+    /*background-image: url(../images/vlna.png);*/
+    /*background-color: royalblue;*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 600px;
+    height: 30px;
+    float: right;
+}
+
+header nav a {
+    display: inline-block;
+    border: 2px solid;
+    border-radius: 25px; 
+    width: 150px;
+    height: 30px;
+    font-size: 20px;
+    /*background-color: fuchsia;*/
+    /*background-image: url(../images/tl_bila.png);*/
+    background-repeat: no-repeat;
+    background-position: center top; 
+    margin: 2px;
+}
+
+section {
+    background-image: url(../images/head2.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    border: 0px ;
+    min-height: 260px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0px;
+    /*width: 930px;*/
+    height: auto;
+}
+
+section header{
+    /*top: 10px;*/
+    background: none;
+    /*background-color: white;*/
+    width: 90%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+section header nav{
+    top : 15px;
+    left: 10px;
+    
+    background-color: white;
+    text-align: left;
+    height: auto;
+    width: 100%;
+    border: 2px solid;
+    border-radius: 25px; 
+
+}
+section header nav a {   
+    border: 0px;
+    top: 0px;
+    padding: 0px;
+    font-size: 13px;
+    height: 0px;
+    /*display: inline-block;*/
+    /*background-color: pink;*/
+}
+
+aside {
+    padding: 15px;
+    background-color: white;
+    border: 2px solid;
+    border-radius: 25px; 
+    display: block;
+    width: 25%;
+    float: right;
+    margin-right: 10%;
+}
+
+article.newClanek{
+    display: block;
+    width: 45%;
+    float: left;
+    margin-left: 10%;
+}
+section article{
+    background-color: white;
+    padding: 15px;
+    text-align: left;
+    /*background: none;*/
+    border: 2px solid;
+    border-radius: 25px; 
+    width: 90%;
+    height: auto;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+section article.produkt{
+    width: 35%;
+    display: inline-table;
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+
+}
+
+section article header{
+    text-align: center;
+    /*background-color: brown;*/
+    height: 30px;
+    width: 100%
+}
+
+section article header a{
+    /*background-color: blue;*/
+    width: auto;
+    height: auto;
+    margin: 0px;
+}
+
+section article header h1{
+    /*background-color: blue;*/
+    width: auto;
+    height: auto;
+    margin: 0px;
+}
+
+
+section article header.nazevProduktu{
+    height: 30px;
+    text-align: center;
+    background: none;
+}
+
+section article img.produkty {
+    float: left;
+    margin-left: 15px;
+    margin-right: 20px;
+    margin-top: 8px;
+}
+
+
+section article div.popisProdukut{
+    // background-color: blue;
+    // margin-left: 15%;
+    margin-left: 145px;
+    margin-top: -15px;
+}
+
+
+footer {
+    /*color: white;*/
+    font-weight: bold;
+    height: 100px;
+}
+
+
+.login{
+    position: relative;
+    height: 30px;
+    float: right;
+    width: 220px;
+}
+
+
+div.flash {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    color: black;
+    background: #FFF9D7;
+    /*border: 1px solid #E2C822;*/
+    padding: 1em;
+    top: 155px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid;
+    border-radius: 25px; 
+}
+
+table {
+    text-align: center;
+}
+
+a , a:visited {
+    color: darkgreen;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* mouse over link */
+a:hover {
+    color: darkgreen;
+}
+/* selected link */
+a:active {
+    color: darkgreen;
+}
+
+#frm-signInForm-email { width: 150px}
+#frm-signInForm-heslo{ width:  150px}
+

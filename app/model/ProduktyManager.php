@@ -27,11 +27,7 @@ class ProduktyManager extends Nette\Object {
     }
 
     public function getProdukty() {
-        $sql = "SELECT p.id_produktu, p.id_materialu, p.id_obrazku, p.nazev, p.popis, p.cena, p.mnozstvi, p.odecetMnozstvi, zk.mnozstvi 
-FROM produkty p
-LEFT OUTER JOIN zbozi_kosik zk ON p.id_materialu = zk.id_zbozi
-";
-        return $this->database->table('produkty');
+        return $this->database->table('produkty')->where('smazan = 0');
     }
     
     public function getMaterialy(){

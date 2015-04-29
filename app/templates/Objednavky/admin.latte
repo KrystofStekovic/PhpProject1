@@ -2,9 +2,6 @@
 
 {block content}
 <header>
-    <nav>
-            <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
-    </nav>  
 </header>
 <article>
     <header>
@@ -14,14 +11,26 @@
     <table style="width:100%">
         <tr>
             <th>Datum vytvoření</th>
+            <th>Datum objednání</th>
+            <th>Datum potvrzení</th>
+            <th>Datum odeslání</th>
             <th>Jmeno a příjmení</th>
+            <th>Adresa</th>
+            <th>Město</th>
+            <th>PSČ</th>
             <th>Stav</th>
             <th></th>
         </tr>
         <tr n:foreach="$objednavky as $objednavka">
             {if $objednavka->stav != 'nový'}
             <td>{$objednavka->datum_vytvoreni|date:'j. n. Y G:i'}</td>
+            <td>{$objednavka->datum_objednani|date:'j. n. Y G:i'}</td>
+            <td>{$objednavka->datum_potvrzeni|date:'j. n. Y G:i'}</td>
+            <td>{$objednavka->datum_odeslani|date:'j. n. Y G:i'}</td>
             <td>{$objednavka->jmeno} {$objednavka->prijmeni}</td>
+            <td>{$objednavka->adresa}</td>
+            <td>{$objednavka->mesto}</td>
+            <td>{$objednavka->psc}</td>
             <td>{$objednavka->stav}</td>
             <td>
                 <a n:href="Objednavky:detail $objednavka->id_kosiku">Detail</a>

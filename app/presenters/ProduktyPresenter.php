@@ -61,10 +61,10 @@ class ProduktyPresenter extends BasePresenter {
                 ->setRequired();
         $form->addSelect('id_materialu', 'Materiál:', $materialy)
                 ->setPrompt('Zvolte meteriál');
-        $form->addText('mnozstvi', 'Zobrazené množství:')
-                ->setRequired();
-        $form->addText('odecetMnozstvi', 'Odpočítat ze skladu:')
-                ->setRequired();
+//        $form->addText('mnozstvi', 'Zobrazené množství:');
+//                ->setRequired();
+//        $form->addText('odecetMnozstvi', 'Odpočítat ze skladu:');
+//                ->setRequired();
         $form->addUpload('obrazek', 'Obrázek:', TRUE)
                 ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
         $form->addSubmit('send', 'Uložit produkt');
@@ -88,11 +88,11 @@ class ProduktyPresenter extends BasePresenter {
         $produktId = $this->getParameter('produktId');
         $produkt = $this->produktyManager->getProdukt($produktId);
         if ($produktId) {
-            $this->obrazkyManager->updateObrazek($produkt->id_obrazku, $values->obrazek);
+            $this->obrazkyManager->updateObrazek($produkt->id_obrazku, $_FILES['obrazek']);
             $this->produktyManager->updateProdukt($values, $produktId);
             $this->flashMessage('Produkt byl úspěšně upraven.', 'success');
         } else {
-            $idObrazku = $this->obrazkyManager->addObrazek($values->obrazek);
+            $idObrazku = $this->obrazkyManager->addObrazek($_FILES['obrazek']);
             $this->produktyManager->insertProdukt($values, $idObrazku);
             $this->flashMessage('Produkt byl úspěšně vložen.', 'success');
         }
@@ -108,7 +108,9 @@ class ProduktyPresenter extends BasePresenter {
     }
 
     public function actionDelete($produktId) {
-        $this->produktyManager->getProdukty($produktId);
+        $produkt = $this->produktyManager->getProdukt($produktId)->toArray();
+        $produkt['smazan'] = 1;
+        $this->produktyManager->updateProdukt($produkt, $produktId);
         $this->flashMessage('Produk byl úspěšně smazán.', 'success');
         $this->redirect('default');
     }

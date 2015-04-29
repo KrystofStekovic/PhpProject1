@@ -10,6 +10,12 @@ use Nette,
  * Homepage presenter.
  */
 class ClankyPresenter extends BasePresenter {
+    
+    /**
+     * @var \App\Model\ObrazkyManager
+     * @inject
+     */
+    public $obrazkyManager;
 
     //private $database;
 
@@ -29,16 +35,35 @@ class ClankyPresenter extends BasePresenter {
 
         $this->template->clanek = $clanek;
     }
+    
+    public function renderNovy(){
+        $this->template->obrazky = $this->obrazkyManager->getObrazky();
+    }
+    
+    public function renderEdit(){
+        $this->template->obrazky = $this->obrazkyManager->getObrazky();
+    }
 
     public function createComponentClanekForm() {
         $form = new Form;
         $form->addText('nadpis', 'Nadpis:')
+                ->setRequired();
+        $form->addTextArea('popis', 'Popis:')
                 ->setRequired();
         $form->addTextArea('text', 'Text:')
                 ->setRequired()
                 ->getControlPrototype()->setClass('ckeditor');
         $form->addSubmit('send', 'Uložit článek');
         $form->onSuccess[] = array($this, 'insertClanek');
+        return $form;
+    }
+
+    public function createComponentPridatObrForm() {
+        $form = new Form;
+        $form->addUpload('obrazek', 'Obrázek:', TRUE)
+                ->addRule(Form::IMAGE, 'Musí to být JPEG, PNG nebo GIF.');
+        $form->addSubmit('send', 'Přidat obrazek');
+        $form->onSuccess[] = array($this, 'pridatObrazek');
         return $form;
     }
 
@@ -55,6 +80,11 @@ class ClankyPresenter extends BasePresenter {
             $this->flashMessage('Članek byl úspěšně vložen.', 'success');
         }
         $this->redirect('this');
+    }
+    
+    public function pridatObrazek($form, $values){
+        $this->obrazkyManager->addObrazek($_FILES['obrazek']);
+        $this->flashMessage('Obrazek byl úspěšně vložen.', 'success');
     }
 
     public function actionEdit($clanekId) {

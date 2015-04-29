@@ -2,11 +2,11 @@
 
 {block content}
 <header>
+{if $user->isInRole('admin')}
     <nav>
-        {if $user->isInRole('admin')}
-            <a n:href="Objednavky:admin">Správa Objednávek</a>
-        {/if}
+        <a n:href="Objednavky:admin">Správa Objednávek</a>
     </nav>  
+{/if}
 </header>
 
 <article>

@@ -3,13 +3,21 @@
 {block content}
 {if $user->isInRole('admin')}
     <header>
-        <nav>
-                <!--<a n:href="Aktuality:nova">Nova aktualita</a>-->
-        </nav>  
     </header>
-    <article>
+    <aside>
+        <h2>Seznam obrázků</h2>
+            {control pridatObrForm}
+        <table>
+            <tr n:foreach="$obrazky as $obrazek">
+                <td><img class="produkty" src="{$obrazek['file']|dataStream}" ></td>
+                <td>{$obrazek['adresa']}</td>
+            </tr>
+        </table>
+        
+    </aside>
+    <article class="newClanek">
         <header>
-            <h1>Nový článek</h1>
+            <h2>Nový článek</h2>
         </header>
 
         {form clanekForm}
@@ -19,10 +27,14 @@
                     <td>{input nadpis}</td>
                 </tr>
                 <tr class="required">
+                    <td>{label popis /}</td>
+                    <td>{input popis}</td>
+                </tr>
+                <tr class="required">
                     <td colspan="2">{input text}</td>
                 </tr>
-                    <td></td>
-                    <td>{input send}</td>
+                <td></td>
+                <td>{input send}</td>
                 </tr>
             </table>
         {/form}
